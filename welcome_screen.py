@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
+from profile_screen import open_profile
 
 # #checks against database for user credentials
 def login():
@@ -8,6 +9,7 @@ def login():
     password = "321"
     if username_entry.get() == username and password_entry.get()==password: #need to pull from database
         messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
+        open_profile()
     else:
         messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
 
