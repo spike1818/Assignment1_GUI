@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from profile_screen import open_profile
+from profile_screen import open_profile #imports profile screen to welcome screen file
 
 # #checks against database for user credentials
 def login():
