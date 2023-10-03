@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
+from profile_screen import open_profile #imports profile screen to welcome screen file
 
 #simple example for demonstrative purposes
 username = "alex" 
@@ -10,6 +11,7 @@ password = "321"
 def login():
     if username_entry.get()==username and password_entry.get()==password: #need to pull from database
         messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
+        open_profile()
     else:
         messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
 

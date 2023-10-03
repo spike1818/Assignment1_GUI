@@ -5,9 +5,9 @@ from profile_screen import open_profile #imports profile screen to welcome scree
 
 # #checks against database for user credentials
 def login():
-    username = "tytufts" 
+    username = "alex" 
     password = "321"
-    if username_entry.get() == username and password_entry.get()==password: #need to pull from database
+    if username_entry.get()==username and password_entry.get()==password: #need to pull from database
         messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
         open_profile()
     else:
