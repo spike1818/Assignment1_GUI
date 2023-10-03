@@ -1,8 +1,7 @@
 import tkinter as tk
-from profile_screen import open_profile
+from welcome_and_create_account import open
 
-root = tk.Tk()
-button = tk.Button(root, width = 20, text = "Start!", command = open_profile)
-button.pack()
+def main():
+    open()
 
-root.mainloop()
+main()
