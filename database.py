@@ -53,10 +53,10 @@ def submit(username, password, firstName, lastName):
     conn.close()
 
     #clear text boxes
-    user.delete(0, END)
-    pword.delete(0, END)
-    fname.delete(0, END)
-    lname.delete(0, END)
+    #user.delete(0, END)
+    #pword.delete(0, END)
+    #fname.delete(0, END)
+    #lname.delete(0, END)
 
 
 

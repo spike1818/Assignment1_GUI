@@ -31,10 +31,19 @@ def open():
         def new_user():
             if new_password_entry.get()!=confirm_password_entry.get():
                 messagebox.showinfo(title="Password Creation Error",message="Password entries do not match.")
-            elif new_username_entry.get()!=username:
-                messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
-            elif new_username_entry.get()==username:
-                messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
+            else:
+                #check usernames
+                usernameExists = False
+                logins = query()
+                for login in logins:
+                    if (new_username_entry.get() == login[0]):
+                        usernameExists = True
+                        messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
+                if (usernameExists):
+                    messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
+                else:
+                    submit(new_username_entry.get(),new_password_entry.get(),firstname_entry.get(),lastname_entry.get())
+                    messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
     
         #window
         create_window = tk.Toplevel(window) #child of login window
