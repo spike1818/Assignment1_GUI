@@ -71,7 +71,7 @@ def query():
 
     print_records = ''
     for record in records:
-        print_records += str(record[0]) + " " + str(record[4]) + "\n"
+        print_records += str(record[0]) + " " + str(record[1]) + " " + str(record[2])+  " " + str(record[3]) + " " + str(record[4]) + "\n"
     
     query_label = Label(root, text = print_records)
     query_label.grid(row = 10, column = 0, columnspan = 2)
