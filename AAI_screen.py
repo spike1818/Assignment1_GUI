@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import *
-from close_login import close_login
 
 def open_AAI():
-    close_login()
     aai = tk.Tk()
     aai.geometry("1000x600")
     aai.title("AAI Page")
