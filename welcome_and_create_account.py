@@ -14,7 +14,7 @@ def open():
             #messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
             open_profile()
         else:
-            messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
+            messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #need a way to link this to create account
 
     #creates a new user and adds their information to database
     def create_acct():  
@@ -28,7 +28,7 @@ def open():
                 messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
 
         #window
-        create_window = tk.Toplevel(window) #child of login window
+        create_window = tk.Toplevel(login_window) #child of login window
         create_window.title("Create Account")
         create_window.geometry('550x350')
         create_window.configure(bg='#4863A0')
