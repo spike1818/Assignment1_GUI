@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from functools import partial
 
 root = Tk()
 root.geometry("400x400")
@@ -35,7 +36,8 @@ def submit(username, password, firstName, lastName):
     #connect to database and create cursor (you need to do this inside the function as well, idk why)
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
-
+    print(username)
+    print(password)
     #insert into table
     c.execute("INSERT INTO login_info VALUES(:user,:pword,:fname,:lname)",
             {
@@ -67,7 +69,7 @@ def query():
     #query the database
     c.execute("SELECT *, oid FROM login_info")
     records = c.fetchall() # list of lists for each row
-    #print(records)
+    print(records)
     
     # print_records = ''
     # for record in records:
@@ -118,7 +120,7 @@ delete_label = Label(root, text = "Delete ID")
 delete_label.grid(row=7,column=0)
 
 #submit button
-submit_btn = Button(root, text="add login to database", command=submit(user.get(),pword.get(),fname.get(),lname.get()))
+submit_btn = Button(root, text="add login to database", command=lambda: submit(user.get(),pword.get(),fname.get(),lname.get()))
 submit_btn.grid(row=5,column=0,columnspan=2,pady=10, padx=10)
 
 #query button
