@@ -11,14 +11,13 @@ def open():
     # #checks against database for user credentials
     def login():
         if username_entry.get()==username and password_entry.get()==password: #need to pull from database
-            messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
+            #messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
             open_profile()
         else:
             messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
 
     #creates a new user and adds their information to database
     def create_acct():  
-        
         #handles creating a new user after the "create account" is pressed
         def new_user():
             if new_password_entry.get()!=confirm_password_entry.get():
@@ -27,7 +26,7 @@ def open():
                 messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
             elif new_username_entry.get()==username:
                 messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
-    
+
         #window
         create_window = tk.Toplevel(window) #child of login window
         create_window.title("Create Account")
@@ -57,22 +56,15 @@ def open():
         confirm_password_entry.grid(row=3, column=1, pady=10, padx=5)
         create_acct_button.grid(row=4, column=0, columnspan=2, pady=10)
 
-        #push the create account button
-            #redirect to login page
-                #account creation is successful and user is added to database
-                #account already exists
-            #error message
-                #passwords do not match
-
         create_frame.pack() #pack is responsive by default
 
         create_window.mainloop() #infinite loop that executes the app
 
-    #make the window
-    window = tk.Tk()
-    window.title("Login")
-    window.geometry('500x400')
-    window.configure(bg='#4863A0')
+    #make the login window
+    login_window = tk.Tk()
+    login_window.title("Login")
+    login_window.geometry('500x400')
+    login_window.configure(bg='#4863A0')
         
     #frame for the widgets--makes it responsive when you change window size
     frame = tk.Frame(bg='#4863A0')
@@ -97,4 +89,4 @@ def open():
 
     frame.pack() #pack is responsive by default
 
-    window.mainloop() #infinite loop that executes the app (stops when window is closed)
+    login_window.mainloop() #infinite loop that executes the app (stops when window is closed)
