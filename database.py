@@ -30,7 +30,7 @@ def delete():
 
 
 #submit function
-def submit():
+def submit(username, password, firstName, lastName):
 
     #connect to database and create cursor (you need to do this inside the function as well, idk why)
     conn = sqlite3.connect('login_list.db')
@@ -39,10 +39,10 @@ def submit():
     #insert into table
     c.execute("INSERT INTO login_info VALUES(:user,:pword,:fname,:lname)",
             {
-                'user':user.get(),
-                'pword':pword.get(),
-                'fname':fname.get(),
-                'lname':lname.get()
+                'user':username,
+                'pword':password,
+                'fname':firstName,
+                'lname':lastName
             })
 
 
@@ -67,18 +67,20 @@ def query():
     #query the database
     c.execute("SELECT *, oid FROM login_info")
     records = c.fetchall() # list of lists for each row
-    print(records)
-
-    print_records = ''
-    for record in records:
-        print_records += str(record[0]) + " " + str(record[1]) + " " + str(record[2])+  " " + str(record[3]) + " " + str(record[4]) + "\n"
+    #print(records)
     
-    query_label = Label(root, text = print_records)
-    query_label.grid(row = 10, column = 0, columnspan = 2)
+    # print_records = ''
+    # for record in records:
+    #     print_records += str(record[0]) + " " + str(record[1]) + " " + str(record[2])+  " " + str(record[3]) + " " + str(record[4]) + "\n"
+    
+    # query_label = Label(root, text = print_records)
+    # query_label.grid(row = 10, column = 0, columnspan = 2)
 
 
     conn.commit()
     conn.close()
+
+    return records
 
 
 
@@ -116,7 +118,7 @@ delete_label = Label(root, text = "Delete ID")
 delete_label.grid(row=7,column=0)
 
 #submit button
-submit_btn = Button(root, text="add login to database", command=submit)
+submit_btn = Button(root, text="add login to database", command=submit(user.get(),pword.get(),fname.get(),lname.get()))
 submit_btn.grid(row=5,column=0,columnspan=2,pady=10, padx=10)
 
 #query button
