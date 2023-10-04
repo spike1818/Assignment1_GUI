@@ -39,7 +39,7 @@ def open():
         #window
         create_window = tk.Toplevel(window) #child of login window
         create_window.title("Create Account")
-        create_window.geometry('550x350')
+        create_window.geometry('600x400')
         create_window.configure(bg='#4863A0')
 
         #frame to hold the widgets
@@ -47,9 +47,13 @@ def open():
 
         #create widgets
         create_acct_label = tk.Label(create_frame, text="Create Account", bg='#4863A0', fg='#FFFFFF', font=("Georgia", 30))
+        firstname_label = tk.Label(create_frame, text="First Name", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
+        lastname_label = tk.Label(create_frame, text="Last Name", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
         new_username_label = tk.Label(create_frame, text="Username", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
         new_password_label = tk.Label(create_frame, text="Password", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
         confirm_password_label = tk.Label(create_frame, text="Confirm Password", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
+        firstname_entry = tk.Entry(create_frame, font=("Arial", 12))
+        lastname_entry = tk.Entry(create_frame, font=("Arial", 12))
         new_username_entry = tk.Entry(create_frame, font=("Arial", 12))
         new_password_entry = tk.Entry(create_frame, show="*", font=("Arial", 12))
         confirm_password_entry = tk.Entry(create_frame, show="*", font=("Arial", 12))
@@ -57,13 +61,18 @@ def open():
 
         #place widgets
         create_acct_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=30)
-        new_username_label.grid(row=1, column=0) 
-        new_password_label.grid(row=2, column=0)
-        confirm_password_label.grid(row=3, column=0)
-        new_username_entry.grid(row=1, column=1, pady=10) #spacing will affect everything in the same row
-        new_password_entry.grid(row=2, column=1, pady=10) 
-        confirm_password_entry.grid(row=3, column=1, pady=10, padx=5)
-        create_acct_button.grid(row=4, column=0, columnspan=2, pady=10)
+        firstname_label.grid(row=1, column=0)
+        lastname_label.grid(row=2, column=0)
+        new_username_label.grid(row=3, column=0) 
+        new_password_label.grid(row=4, column=0)
+        confirm_password_label.grid(row=5, column=0)
+
+        firstname_entry.grid(row=1,column=1, pady=10)
+        lastname_entry.grid(row=2, column=1, pady=10)
+        new_username_entry.grid(row=3, column=1, pady=10) #spacing will affect everything in the same row
+        new_password_entry.grid(row=4, column=1, pady=10) 
+        confirm_password_entry.grid(row=5, column=1, pady=10, padx=5)
+        create_acct_button.grid(row=6, column=0, columnspan=2, pady=10)
 
             #push the create account button
                 #redirect to login page
