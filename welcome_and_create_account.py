@@ -12,10 +12,6 @@ admin_password = "password"
 def open():
     # #checks against database for user credentials
     def login():
-
-        if username_entry.get()==admin_username and password_entry.get()==admin_password:
-            admin_screen()
-
         logins = query()
         loginSuccessful = False
 
@@ -27,7 +23,9 @@ def open():
                 window.destroy()
                 open_profile()
                 open()
-        if (not loginSuccessful):
+        if username_entry.get()==admin_username and password_entry.get()==admin_password:
+            admin_screen()
+        elif (not loginSuccessful):
             messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
 
     #creates a new user and adds their information to database
@@ -88,13 +86,6 @@ def open():
         new_password_entry.grid(row=4, column=1, pady=10) 
         confirm_password_entry.grid(row=5, column=1, pady=10, padx=5)
         create_acct_button.grid(row=6, column=0, columnspan=2, pady=10)
-
-            #push the create account button
-                #redirect to login page
-                    #account creation is successful and user is added to database
-                    #account already exists
-                #error message
-                    #passwords do not match
 
         create_frame.pack() #pack is responsive by default
 
