@@ -16,13 +16,13 @@ c = conn.cursor()
 '''
 
 #delete function
-def delete(username):
+def delete(user):
 
     #connect to database and create cursor (you need to do this inside the function as well, idk why)
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
-    c.execute("DELETE from login_info WHERE username LIKE " + username)#use oid instead of username or password because there may be multiples
+    c.execute("DELETE from login_info WHERE username LIKE " + user)#use oid instead of username or password because there may be multiples
 
     #delete_box.delete(0,END)
 
