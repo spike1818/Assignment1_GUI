@@ -42,5 +42,3 @@ def admin_screen():
     admin_frame.pack() #pack is responsive by default
 
     admin_window.mainloop() #infinite loop that executes the app (stops when window is closed)
-
-admin_screen()
