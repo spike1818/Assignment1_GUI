@@ -14,21 +14,21 @@ c = conn.cursor()
 #create table
 #c.execute("CREATE TABLE login_info(username text, password text, first_name text, last_name text)")
 '''
-'''
+
 #delete function
-def delete():
+def delete(username):
 
     #connect to database and create cursor (you need to do this inside the function as well, idk why)
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
-    c.execute("DELETE from login_info WHERE oid = " + delete_box.get())#use oid instead of username or password because there may be multiples
+    c.execute("DELETE from login_info WHERE username = " + username)#use oid instead of username or password because there may be multiples
 
-    delete_box.delete(0,END)
+    #delete_box.delete(0,END)
 
     conn.commit()
     conn.close()
-'''
+
 
 
 #submit function
