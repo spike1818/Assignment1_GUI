@@ -22,7 +22,7 @@ def delete(username):
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
-    c.execute("DELETE from login_info WHERE username = " + username)#use oid instead of username or password because there may be multiples
+    c.execute("DELETE from login_info WHERE username LIKE " + username)#use oid instead of username or password because there may be multiples
 
     #delete_box.delete(0,END)
 
