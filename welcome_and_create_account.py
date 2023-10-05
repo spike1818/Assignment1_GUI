@@ -24,7 +24,9 @@ def open():
                 open_profile()
                 open()
         if username_entry.get()==admin_username and password_entry.get()==admin_password:
+            window.destroy()
             admin_screen()
+            open()
         elif (not loginSuccessful):
             messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
 
@@ -86,6 +88,8 @@ def open():
         new_password_entry.grid(row=4, column=1, pady=10) 
         confirm_password_entry.grid(row=5, column=1, pady=10, padx=5)
         create_acct_button.grid(row=6, column=0, columnspan=2, pady=10)
+
+           
 
         create_frame.pack() #pack is responsive by default
 
