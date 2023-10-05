@@ -1,7 +1,7 @@
 from tkinter import *
 import sqlite3
 from functools import partial
-
+'''
 root = Tk()
 root.geometry("400x400")
 
@@ -13,7 +13,8 @@ c = conn.cursor()
 
 #create table
 #c.execute("CREATE TABLE login_info(username text, password text, first_name text, last_name text)")
-
+'''
+'''
 #delete function
 def delete():
 
@@ -27,7 +28,7 @@ def delete():
 
     conn.commit()
     conn.close()
-
+'''
 
 
 #submit function
@@ -86,7 +87,7 @@ def query():
 
 
 
-
+'''
 #text boxes for test input
 user = Entry(root, width = 30)
 user.grid(row=0, column = 1, padx=20)
@@ -139,3 +140,4 @@ conn.commit()
 conn.close()
 
 root.mainloop()
+'''
