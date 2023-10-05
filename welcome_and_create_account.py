@@ -3,14 +3,18 @@ from tkinter import *
 from tkinter import messagebox
 from open_profile import open_profile #imports profile screen to welcome screen file
 from database import *
+from admin_screen import admin_screen
 
 #simple example for demonstrative purposes
-username = "alex" 
-password = "321"
+admin_username = "admin" 
+admin_password = "password"
 
 def open():
     # #checks against database for user credentials
     def login():
+
+        if username_entry.get()==admin_username and password_entry.get()==admin_password:
+            admin_screen()
 
         logins = query()
         loginSuccessful = False

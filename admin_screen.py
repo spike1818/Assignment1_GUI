@@ -24,7 +24,7 @@ admin_frame = tk.Frame(bg='#4863A0')
 #make widgets
 delete_user_entry = tk.Entry(admin_frame, font=("Arial", 12))
 delete_user_label = tk.Label(admin_frame, text="Enter Username", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-delete_user_button = tk.Button(admin_frame, text="Delete User", bg='#FFFFFF', fg='#000000', font=("Arial", 10))
+delete_user_button = tk.Button(admin_frame, text="Delete User", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=lambda: delete(delete_user_entry.get()))
 admin_label = tk.Label(admin_frame, text="Admin Settings", bg='#4863A0', fg='#FFFFFF', font=("Georgia", 20))
 show_users_button = tk.Button(admin_frame, text="Show Usernames", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=show_users)
 
