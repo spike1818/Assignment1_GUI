@@ -1,5 +1,5 @@
 import tkinter as tk
-from welcome_and_create_account import open
+from welcome_screen import open
 
 def main():
     open()
