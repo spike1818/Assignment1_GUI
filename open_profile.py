@@ -4,7 +4,6 @@ from AAI_screen import open_AAI
 from AOO_screen import open_AOO
 from VOO_screen import open_VOO
 from VVI_screen import open_VVI
-import welcome_screen
 
 def open_profile():
     profile = tk.Tk()
@@ -15,9 +14,7 @@ def open_profile():
     profile_middleframe = tk.Frame(profile, bg='#4863A0')
     profile_bottomframe = tk.Frame(profile, bg='#4863A0')
 
-    welcome_message = "Welcome " + welcome_screen.login_name
-
-    welcome_message = tk.Label(profile_topframe, text = welcome_message, bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
+    welcome_message = tk.Label(profile_topframe, text = "Welcome 'name'", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     tracing_message = tk.Label(profile_middleframe, text = "Tracing Methods", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     sign_out = tk.Button(profile_bottomframe, text = "Sign Out", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = profile.destroy)
     aoo = tk.Button(profile_middleframe, text = "AOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AOO)
