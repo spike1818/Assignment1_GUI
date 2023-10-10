@@ -12,13 +12,15 @@ admin_password = "password"
 
 def open():
     # #checks against database for user credentials
+    global login_name
     def login():
         logins = query()
         loginSuccessful = False
-
+        global login_name
         for login in logins:
-            print(login)
+            print(login) #do we need this?
             if username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
+                login_name = login_name = login[2] + " " + login[3]
                 loginSuccessful = True
                 window.destroy()
                 open_profile()
