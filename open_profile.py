@@ -17,7 +17,8 @@ def open_profile():
 
     message = "Welcome," + " " + welcome_screen.login_name
 
-    welcome_message = tk.Label(profile_topframe, text = message, bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
+    connection_message = tk.Label(profile, text="Connection Status: Pacemaker not connected", bg='#4863A0', fg='#FFFFFF', font=("Arial",8))
+    welcome_message = tk.Label(profile_topframe, text = message, bg='#4863A0', fg='#FFFFFF', font=("Georgia", 16))
     tracing_message = tk.Label(profile_middleframe, text = "Tracing Methods", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     sign_out = tk.Button(profile_bottomframe, text = "Sign Out", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = profile.destroy)
     aoo = tk.Button(profile_middleframe, text = "AOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AOO)
@@ -25,8 +26,8 @@ def open_profile():
     aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AAI)
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VVI)
     
+    connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 40)
-
     tracing_message.grid(row=0, column=0)
     sign_out.grid(row=0, column=0)
     aoo.grid(row=1, column=0)
@@ -37,6 +38,10 @@ def open_profile():
     profile_topframe.pack()
     profile_middleframe.pack()
     profile_bottomframe.pack()
+
+    #later will check whether pacemaker is connected before displaying error message
+    messagebox.showinfo(title="Connection Error",message="Pacemaker is not connected.")
+
     profile.mainloop()
 
 # if __name__ == "__main__":
