@@ -15,10 +15,12 @@ def open():
     def login():
         logins = query()
         loginSuccessful = False
+        global login_name
 
         for login in logins:
-            print(login)
+            print(login) #do we need this?
             if username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
+                login_name = login_name = login[2] + " " + login[3]
                 loginSuccessful = True
                 window.destroy()
                 open_profile()
@@ -29,6 +31,15 @@ def open():
             open()
         elif (not loginSuccessful):
             messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
+
+    # def find_name():
+    #     logins = query()
+    #     for login in logins:
+    #         if username_entry.get()==login[0] and password_entry.get()==login[1]:
+    #             #global login_name
+    #             login_name = login[2] + " " + login[3]
+    #     print(login_name)
+
 
     #make the window
     window = tk.Tk()
@@ -60,3 +71,5 @@ def open():
     frame.pack() #pack is responsive by default
 
     window.mainloop() #infinite loop that executes the app (stops when window is closed)
+
+    print(login_name)
