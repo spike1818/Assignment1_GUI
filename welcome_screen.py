@@ -19,7 +19,6 @@ def open():
         for login in logins:
             print(login)
             if username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
-                messagebox.showinfo(title="Successful Login",message="You have successfully logged in.")
                 loginSuccessful = True
                 window.destroy()
                 open_profile()
