@@ -7,7 +7,7 @@ from admin_screen import admin_screen
 from create_account_screen import *
 
 #simple example for demonstrative purposes
-admin_username = "admin" 
+admin_username = "admin"
 admin_password = "password"
 
 def open():
@@ -24,7 +24,7 @@ def open():
                 loginSuccessful = True
                 window.destroy()
                 open_profile()
-                open()
+                #open()
         if username_entry.get()==admin_username and password_entry.get()==admin_password:
             window.destroy()
             admin_screen()

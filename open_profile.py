@@ -8,18 +8,19 @@ import welcome_screen
 
 def open_profile():
     profile = tk.Tk()
-    profile.geometry("500x400")
+    profile.geometry("600x500")
     profile.configure(bg='#4863A0')
     profile.title("Profile Page")
     profile_topframe = tk.Frame(profile, bg='#4863A0')
     profile_middleframe = tk.Frame(profile, bg='#4863A0')
     profile_bottomframe = tk.Frame(profile, bg='#4863A0')
 
-    message = "Welcome," + " " + welcome_screen.login_name
+    message = "Welcome," + " " + welcome_screen.login_name #matches username entered to name stored in database
 
-    connection_message = tk.Label(profile, text="Connection Status: Pacemaker not connected", bg='#4863A0', fg='#FFFFFF', font=("Arial",8))
+    #create info for corner of screen
+    connection_message = tk.Label(profile, text="Connection Status: Pacemaker not connected\nPacemaker version: 1\nDate of implant: 01/01/2023", bg='#4863A0', fg='#FFFFFF', font=("Arial",8))
     welcome_message = tk.Label(profile_topframe, text = message, bg='#4863A0', fg='#FFFFFF', font=("Georgia", 16))
-    tracing_message = tk.Label(profile_middleframe, text = "Tracing Methods", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
+    tracing_message = tk.Label(profile_middleframe, text = "Tracing Methods", bg='#4863A0', fg='#FFFFFF', font=("Georgia", 16))
     sign_out = tk.Button(profile_bottomframe, text = "Sign Out", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = profile.destroy)
     aoo = tk.Button(profile_middleframe, text = "AOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AOO)
     voo = tk.Button(profile_middleframe, text = "VOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VOO)
@@ -27,13 +28,13 @@ def open_profile():
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VVI)
     
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
-    welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 40)
-    tracing_message.grid(row=0, column=0)
-    sign_out.grid(row=0, column=0)
+    welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
+    tracing_message.grid(row=0, column=0, pady=10)
+    sign_out.grid(row=0, column=0, pady=10)
     aoo.grid(row=1, column=0)
-    voo.grid(row=2, column=0)
+    voo.grid(row=2, column=0, pady=10)
     aai.grid(row=3, column=0)
-    vvi.grid(row=4, column=0)
+    vvi.grid(row=4, column=0, pady=10)
     profile_middleframe.grid_rowconfigure(5, minsize=50)
     profile_topframe.pack()
     profile_middleframe.pack()
@@ -43,6 +44,3 @@ def open_profile():
     messagebox.showinfo(title="Connection Error",message="Pacemaker is not connected.")
 
     profile.mainloop()
-
-# if __name__ == "__main__":
-#     open_profile()
