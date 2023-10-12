@@ -8,7 +8,7 @@ import welcome_screen
 
 def open_profile():
     profile = tk.Tk()
-    profile.geometry("600x500")
+    profile.geometry("500x450")
     profile.configure(bg='#4863A0')
     profile.title("Profile Page")
     profile_topframe = tk.Frame(profile, bg='#4863A0')
@@ -30,7 +30,7 @@ def open_profile():
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
     tracing_message.grid(row=0, column=0, pady=10)
-    sign_out.grid(row=0, column=0, pady=10)
+    sign_out.grid(row=0, column=0)
     aoo.grid(row=1, column=0)
     voo.grid(row=2, column=0, pady=10)
     aai.grid(row=3, column=0)

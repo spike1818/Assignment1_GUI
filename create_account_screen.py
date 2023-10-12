@@ -2,30 +2,35 @@ import tkinter as tk
 from welcome_screen import *
 from tkinter import messagebox
 from database import *
-from welcome_screen import *
 
  #creates a new user and adds their information to database
 def create_acct():
     #handles creating a new user after the "create account" is pressed
     def new_user():
-        if new_password_entry.get()!=confirm_password_entry.get():
+        if not(firstname_entry.get()):
+            messagebox.showinfo(title="Account Creation Error",message="Enter a valid first name.")
+        elif not(lastname_entry.get()):
+            messagebox.showinfo(title="Account Creation Error",message="Enter a valid last name.")
+        elif not(new_username_entry.get()):
+            messagebox.showinfo(title="Account Creation Error",message="Enter a valid username.")
+        elif new_password_entry.get()!=confirm_password_entry.get():
             messagebox.showinfo(title="Password Creation Error",message="Password entries do not match.")
         elif len(new_password_entry.get()) < 8:
             messagebox.showinfo(title="Password Creation Error",message="Password must be at least 8 characters")
         else:
-                #check usernames
-                usernameExists = False
-                logins = query()
-                for login in logins:
-                    if (new_username_entry.get() == login[0]):
-                        usernameExists = True
-                        messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
-                if (usernameExists):
+            #check usernames
+            usernameExists = False
+            logins = query()
+            for login in logins:
+                if (new_username_entry.get() == login[0]):
+                    usernameExists = True
                     messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
-                else:
-                    submit(new_username_entry.get(),new_password_entry.get(),firstname_entry.get(),lastname_entry.get())
-                    messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
-                    create_window.destroy()
+            if usernameExists:
+                messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
+            else:
+                submit(new_username_entry.get(),new_password_entry.get(),firstname_entry.get(),lastname_entry.get())
+                messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
+                create_window.destroy()
         
     #window
     create_window = tk.Tk()
