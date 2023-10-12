@@ -15,6 +15,89 @@ c = conn.cursor()
 #c.execute("CREATE TABLE login_info(username text, password text, first_name text, last_name text)")
 '''
 
+def update(record_id):
+
+    #open connection
+    conn = sqlite3.connect('login_list.db')
+    c = conn.cursor()
+
+    c.execute("""UPDATE login_info SET
+        username = :user,
+        password = :pword,
+        first_name = :first,
+        last_name = :last
+
+        WHERE oid = :oid""",
+        {'user': user_edit.get(),
+        'pword': pword_edit.get(),
+        'first': fname_edit.get(),
+        'last': lname_edit.get(),
+        'oid': record_id
+
+        })
+
+    #close connection
+    conn.commit()
+    conn.close()
+
+#edit function
+def edit(record_id):
+    editor = Tk()
+    editor.title('Update')
+    editor.geometry("400x600")
+
+    #open connection
+    conn = sqlite3.connect('login_list.db')
+    c = conn.cursor()
+
+    #query the database
+    c.execute("SELECT * FROM login_info WHERE oid = " + record_id)
+    records = c.fetchall() # list of lists for each row
+
+    #global variables for text box names
+    global user_edit
+    global pword_edit
+    global fname_edit
+    global lname_edit
+
+    #text boxes for test input
+    user_edit = Entry(editor, width = 30)
+    user_edit.grid(row=0, column = 1, padx=20)
+    pword_edit = Entry(editor, width = 30)
+    pword_edit.grid(row=1, column = 1)
+    fname_edit = Entry(editor, width = 30)
+    fname_edit.grid(row=2, column = 1)
+    lname_edit = Entry(editor, width = 30)
+    lname_edit.grid(row=3, column = 1)
+
+    #labels
+    user_edit_label = Label(editor, text = "Username")
+    user_edit_label.grid(row=0,column = 0)
+    pword_edit_label = Label(editor, text = "Password")
+    pword_edit_label.grid(row=1,column = 0)
+    fname_edit_label = Label(editor, text = "First Name")
+    fname_edit_label.grid(row=2,column = 0)
+    lname_edit_label = Label(editor, text = "Last Name")
+    lname_edit_label.grid(row=3,column = 0)
+
+    #fill boxes with current info
+    for record in records:
+        user_edit.insert(0,record[0])
+        pword_edit.insert(0,record[1])
+        fname_edit.insert(0,record[2])
+        lname_edit.insert(0,record[3])
+
+    #save button
+    save_btn = Button(editor, text = "Save Changes", command= lambda: update(record_id))
+    save_btn.grid(row=4, column = 0)
+
+    #close connection
+    conn.commit()
+    conn.close()
+    
+
+
+
 #delete function
 def delete(idNum):
 
@@ -71,14 +154,14 @@ def query():
     c.execute("SELECT *, oid FROM login_info")
     records = c.fetchall() # list of lists for each row
     print(records)
+    '''
+    print_records = ''
+    for record in records:
+         print_records += str(record[0]) + " " + str(record[1]) + " " + str(record[2])+  " " + str(record[3]) + " " + str(record[4]) + "\n"
     
-    # print_records = ''
-    # for record in records:
-    #     print_records += str(record[0]) + " " + str(record[1]) + " " + str(record[2])+  " " + str(record[3]) + " " + str(record[4]) + "\n"
-    
-    # query_label = Label(root, text = print_records)
-    # query_label.grid(row = 10, column = 0, columnspan = 2)
-
+    query_label = Label(root, text = print_records)
+    query_label.grid(row = 10, column = 0, columnspan = 2)
+    '''
 
     conn.commit()
     conn.close()
@@ -117,7 +200,7 @@ fname_label.grid(row=2,column = 0)
 lname_label = Label(root, text = "Last Name")
 lname_label.grid(row=3,column = 0)
 
-delete_label = Label(root, text = "Delete ID")
+delete_label = Label(root, text = "Select ID")
 delete_label.grid(row=7,column=0)
 
 #submit button
@@ -128,9 +211,14 @@ submit_btn.grid(row=5,column=0,columnspan=2,pady=10, padx=10)
 query_btn = Button(root, text="Show Records", command=query)
 query_btn.grid(row=6,column=0,columnspan=2,pady=10, padx=10)
 
-#delete button
+
+#select button
 delete_btn = Button(root, text="Delete Record", command=delete)
 delete_btn.grid(row=8,column=0,columnspan=2,pady=10, padx=10)
+
+#edit button
+edit_btn = Button(root, text="Edit Record", command=lambda: edit(delete_box.get()))
+edit_btn.grid(row=9,column=0,columnspan=2,pady=10, padx=10)
 
 #commit changes
 conn.commit()
