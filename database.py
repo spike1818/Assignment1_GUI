@@ -4,7 +4,7 @@ from functools import partial
 '''
 root = Tk()
 root.geometry("400x400")
-
+'''
 #create database
 conn = sqlite3.connect('login_list.db')
 
@@ -12,8 +12,23 @@ conn = sqlite3.connect('login_list.db')
 c = conn.cursor()
 
 #create table
-#c.execute("CREATE TABLE login_info(username text, password text, first_name text, last_name text)")
-'''
+c.execute("""CREATE TABLE login_info(
+            username text, 
+            password text, 
+            firstName text, 
+            lastName text, 
+            lowerRateLimit integer,
+            upperRateLimit integer,
+            atrialAmplitude integer,
+            atrialPulseWidth integer,
+            ventricularAmplitude integer,
+            ventricularPulseWidth integer,
+            VRP integer,
+            ARP integer,
+            hysteresis text,
+            Mode text
+          )""")
+
 
 def update(record_id):
 
@@ -115,20 +130,40 @@ def delete(idNum):
 
 
 #submit function
-def submit(username, password, firstName, lastName):
+def submit(username, password, firstName, lastName,):
 
     #connect to database and create cursor (you need to do this inside the function as well, idk why)
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
     print(username)
     print(password)
+
+    lowerRateLimit = 60
+    upperRateLimit = 120
+    atrialAmplitude = 3500
+    atrialPulseWidth = 4000
+    ventricularAmplitude = 3500
+    ventricularPulseWidth = 4000
+    VRP = 320
+    ARP = 250
+    hysteresis = "off"
+
     #insert into table
-    c.execute("INSERT INTO login_info VALUES(:user,:pword,:fname,:lname)",
+    c.execute("INSERT INTO login_info VALUES(:username,:password,:firstName,:lastName)",
             {
-                'user':username,
-                'pword':password,
-                'fname':firstName,
-                'lname':lastName
+                'username':username,
+                'password':password,
+                'firstName':firstName,
+                'lastName':lastName,
+                'lowerRateLimit':lowerRateLimit,
+                'upperRateLimit':upperRateLimit,
+                'atrialAmplitude':atrialAmplitude,
+                'atrialPulseWidth':atrialPulseWidth,
+                'ventricularAmplitude':ventricularAmplitude,
+                'ventricularPulseWidth':ventricularPulseWidth,
+                'VRP':VRP,
+                'ARP':ARP,
+                'hysteresis':hysteresis
             })
 
 
