@@ -6,10 +6,10 @@ root = Tk()
 root.geometry("400x400")
 '''
 #create database
-#conn = sqlite3.connect('login_list.db')
+conn = sqlite3.connect('login_list.db')
 
 # Create cursor
-#c = conn.cursor()
+c = conn.cursor()
 
 #create table
 '''
@@ -20,13 +20,12 @@ c.execute("""CREATE TABLE login_info(
             lastName text, 
             lowerRateLimit integer,
             upperRateLimit integer,
-            atrialAmplitude integer,
-            atrialPulseWidth integer,
-            ventricularAmplitude integer,
-            ventricularPulseWidth integer,
+            atrialAmplitude real,
+            atrialPulseWidth real,
+            ventricularAmplitude real,
+            ventricularPulseWidth real,
             VRP integer,
             ARP integer,
-            hysteresis text,
             Mode text
           )""")
 '''
@@ -141,16 +140,16 @@ def submit(username, password, firstName, lastName,):
 
     lowerRateLimit = 60
     upperRateLimit = 120
-    atrialAmplitude = 3500
-    atrialPulseWidth = 4000
-    ventricularAmplitude = 3500
-    ventricularPulseWidth = 4000
+    atrialAmplitude = 3.5
+    atrialPulseWidth = 0.4
+    ventricularAmplitude = 3.5
+    ventricularPulseWidth = 0.4
     VRP = 320
     ARP = 250
-    hysteresis = "off"
+    mode = "off"
 
     #insert into table
-    c.execute("INSERT INTO login_info VALUES(:username,:password,:firstName,:lastName)",
+    c.execute("INSERT INTO login_info VALUES(:username,:password,:firstName,:lastName,:lowerRateLimit,:upperRateLimit,:atrialAmplitude,:atrialPulseWidth,:ventricularAmplitude,:ventricularPulseWidth,:VRP,:ARP,:mode)",
             {
                 'username':username,
                 'password':password,
@@ -164,7 +163,7 @@ def submit(username, password, firstName, lastName,):
                 'ventricularPulseWidth':ventricularPulseWidth,
                 'VRP':VRP,
                 'ARP':ARP,
-                'hysteresis':hysteresis
+                'mode':mode
             })
 
 
