@@ -6,12 +6,13 @@ root = Tk()
 root.geometry("400x400")
 '''
 #create database
-conn = sqlite3.connect('login_list.db')
+#conn = sqlite3.connect('login_list.db')
 
 # Create cursor
-c = conn.cursor()
+#c = conn.cursor()
 
 #create table
+'''
 c.execute("""CREATE TABLE login_info(
             username text, 
             password text, 
@@ -28,7 +29,7 @@ c.execute("""CREATE TABLE login_info(
             hysteresis text,
             Mode text
           )""")
-
+'''
 
 def update(record_id):
 
