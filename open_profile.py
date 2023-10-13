@@ -4,6 +4,7 @@ from AAI_screen import open_AAI
 from AOO_screen import open_AOO
 from VOO_screen import open_VOO
 from VVI_screen import open_VVI
+from change_settings import change_settings
 import welcome_screen
 
 def open_profile():
@@ -26,11 +27,13 @@ def open_profile():
     voo = tk.Button(profile_middleframe, text = "VOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VOO)
     aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AAI)
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VVI)
+    Profile_edit = tk.Button(profile_bottomframe, text = "Profile Edit", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = change_settings)
     
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
     tracing_message.grid(row=0, column=0, pady=10)
-    sign_out.grid(row=0, column=0)
+    Profile_edit.grid(row=0, column = 0)
+    sign_out.grid(row=1, column=0)
     aoo.grid(row=1, column=0)
     voo.grid(row=2, column=0, pady=10)
     aai.grid(row=3, column=0)
