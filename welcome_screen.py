@@ -12,7 +12,6 @@ admin_password = "password"
 
 def open():
     # #checks against database for user credentials
-    global login_name
     def login():
         logins = query()
         loginSuccessful = False
