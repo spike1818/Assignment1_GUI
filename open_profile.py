@@ -9,7 +9,7 @@ import welcome_screen
 
 def open_profile():
     profile = tk.Tk()
-    profile.geometry("500x450")
+    profile.geometry("500x500")
     profile.configure(bg='#4863A0')
     profile.title("Profile Page")
     profile_topframe = tk.Frame(profile, bg='#4863A0')
@@ -49,7 +49,7 @@ def open_profile():
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
     tracing_message.grid(row=1, column=2, pady=10)
     Profile_edit.grid(row=0, column = 0)
-    sign_out.grid(row=1, column=0)
+    sign_out.grid(row=1, column=0, pady=10)
     aoo.grid(row=2, column=2)
     voo.grid(row=3, column=2, pady=10)
     aai.grid(row=4, column=2)
@@ -59,8 +59,6 @@ def open_profile():
     profile_topframe.pack()
     profile_middleframe.pack()
     profile_bottomframe.pack()
-
-
 
     #later will check whether pacemaker is connected before displaying error message
     messagebox.showinfo(title="Connection Error",message="Pacemaker is not connected.")
