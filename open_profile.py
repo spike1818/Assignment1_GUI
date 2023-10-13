@@ -28,20 +28,39 @@ def open_profile():
     aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AAI)
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VVI)
     Profile_edit = tk.Button(profile_bottomframe, text = "Profile Edit", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = change_settings)
+
+        #pacing modes
+    pulserate_acc_title = tk.Label(profile_middleframe, text="Pulse Rate: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulsewidth_acc_title = tk.Label(profile_middleframe, text="Pulse Width: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseamp_acc_title = tk.Label(profile_middleframe, text="Pulse Amplitude: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    sensingsense_acc_title = tk.Label(profile_middleframe, text="Sensing Sensitivity: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pacingmode_acc_title = tk.Label(profile_middleframe, text="Pacing Mode: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    refracper_acc_title = tk.Label(profile_middleframe, text="Refractory Period: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+
+        #acc title alignment
+    pulserate_acc_title.grid(row=1,column=0)
+    pulsewidth_acc_title.grid(row=2,column=0)
+    pulseamp_acc_title.grid(row=3,column=0)
+    sensingsense_acc_title.grid(row=4,column=0)
+    pacingmode_acc_title.grid(row=5,column=0)
+    refracper_acc_title.grid(row=6,column=0)
     
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
-    tracing_message.grid(row=0, column=0, pady=10)
+    tracing_message.grid(row=1, column=2, pady=10)
     Profile_edit.grid(row=0, column = 0)
     sign_out.grid(row=1, column=0)
-    aoo.grid(row=1, column=0)
-    voo.grid(row=2, column=0, pady=10)
-    aai.grid(row=3, column=0)
-    vvi.grid(row=4, column=0, pady=10)
-    profile_middleframe.grid_rowconfigure(5, minsize=50)
+    aoo.grid(row=2, column=2)
+    voo.grid(row=3, column=2, pady=10)
+    aai.grid(row=4, column=2)
+    vvi.grid(row=5, column=2, pady=10)
+    profile_middleframe.grid_rowconfigure(10, minsize=50)
+    profile_middleframe.grid_columnconfigure(1, min = 150)
     profile_topframe.pack()
     profile_middleframe.pack()
     profile_bottomframe.pack()
+
+
 
     #later will check whether pacemaker is connected before displaying error message
     messagebox.showinfo(title="Connection Error",message="Pacemaker is not connected.")
