@@ -59,6 +59,7 @@ def edit_data():
 
     #save button
     save_btn = Button(editor_frame, text = "Save Changes", command= lambda: database.update(welcome_screen.login_id))
+    exit_btn = Button(editor_frame, text = "Exit", command= editor.destroy)
 
     edit_data_label.grid(row=0, column=0, columnspan=2, pady=10)
 
@@ -92,8 +93,10 @@ def edit_data():
     ARP_edit_label.grid(row=12,column = 0)
     mode_edit_label.grid(row=13,column = 0)
 
-    #place save button
+    #place save and exit button
     save_btn.grid(row=14, column = 0, columnspan=2, pady=10)
+    exit_btn.grid(row=15, column = 0, columnspan=2)
+    
 
     #fill boxes with current info
     records = database.query()

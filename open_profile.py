@@ -19,8 +19,15 @@ def open_profile():
     profile_bottomframe = tk.Frame(profile, bg='#4863A0')
 
     message = "Welcome," + " " + welcome_screen.login_name #matches username entered to name stored in database
-    #LRLmessage = "Lower Rate Limit: " + welcome_screen.LRL
-
+    LRLmessage = "Lower Rate Limit: " + str(welcome_screen.login_LRL)
+    URLmessage = "Upper Rate Limit: " + str(welcome_screen.login_URL)
+    APWmessage = "Atrial Pulse Width: " + str(welcome_screen.login_APW)
+    AAmessage = "Atrial amplitude: " + str(welcome_screen.login_AA)
+    ARPmessage = "ARP: " + str(welcome_screen.login_ARP)
+    VPWmessage = "Ventricular Pulse Width: " + str(welcome_screen.login_VPW)
+    VAmessage = "Vntricular Anplitude: " + str(welcome_screen.login_VA)
+    VRPmessage = "VRP: " + str(welcome_screen.login_VRP)
+    Mmessage = "Pacing Mode: " + str(welcome_screen.login_M)
 
     #create info for corner of screen
     connection_message = tk.Label(profile, text="Connection Status: Pacemaker not connected\nPacemaker version: 1\nDate of implant: 01/01/2023", bg='#4863A0', fg='#FFFFFF', font=("Arial",8))
@@ -36,16 +43,15 @@ def open_profile():
     Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = lambda: database.edit(str(welcome_screen.login_id)))
 
         #pacing modes
-    pulseratelow_acc_title = tk.Label(profile_middleframe, text="Lower Rate Limit: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulseratehigh_acc_title = tk.Label(profile_middleframe, text="Upper Rate Limit: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulsewidth_arial_title = tk.Label(profile_middleframe, text="Arial Pulse Width: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulseamp_arial_title = tk.Label(profile_middleframe, text="Arial Amplitude: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulsewidth_ventr_title = tk.Label(profile_middleframe, text="Ventricular Pulse Width: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulseamp_ventr_title = tk.Label(profile_middleframe, text="Ventricular Amplitude: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    VRP_acc_title = tk.Label(profile_middleframe, text="VRP: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pacingmode_acc_title = tk.Label(profile_middleframe, text="Pacing Mode: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    ARP_acc_title = tk.Label(profile_middleframe, text="ARP: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    hysterisis_title = tk.Label(profile_middleframe, text="Hysterisis: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseratelow_acc_title = tk.Label(profile_middleframe, text= LRLmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseratehigh_acc_title = tk.Label(profile_middleframe, text= URLmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulsewidth_arial_title = tk.Label(profile_middleframe, text= APWmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseamp_arial_title = tk.Label(profile_middleframe, text= AAmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulsewidth_ventr_title = tk.Label(profile_middleframe, text= VPWmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseamp_ventr_title = tk.Label(profile_middleframe, text= VAmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    VRP_acc_title = tk.Label(profile_middleframe, text= VRPmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pacingmode_acc_title = tk.Label(profile_middleframe, text= Mmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    ARP_acc_title = tk.Label(profile_middleframe, text= ARPmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
 
         #acc title alignment
     pulseratelow_acc_title.grid(row=2,column=0)
@@ -55,9 +61,8 @@ def open_profile():
     pulsewidth_ventr_title.grid(row=6,column=0)
     pulseamp_ventr_title.grid(row=7,column=0)
     VRP_acc_title.grid(row=8,column=0)
-    pacingmode_acc_title.grid(row=11,column=0)
+    pacingmode_acc_title.grid(row=10,column=0)
     ARP_acc_title.grid(row=9,column=0)
-    hysterisis_title.grid(row = 10, column = 0)
     
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)

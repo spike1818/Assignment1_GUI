@@ -17,17 +17,30 @@ def open():
         logins = query()
         loginSuccessful = False
         global login_name
-        global login_id #, LRL_id, URL_id, AA_id, APW_id, VA_id, VPW_id, VRP_id, ARP_id, M_id
+        global login_id
+        global login_LRL
+        global login_URL
+        global login_AA
+        global login_APW
+        global login_VA
+        global login_VPW 
+        global login_VRP
+        global login_ARP
+        global login_M
   
         for login in logins:
-            print(login) #do we need this?
             if username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
                 login_name = login_name = login[2] + " " + login[3]
                 login_id = login[13]
-                #LRL_id = login[4], URL_id = login[5]
-                #AA_id = login[6], APW_id = login[7], ARP_id = login[10]
-                #VA_id = login[8], VPW_id = login[9], VRP_id = login[11]
-                #M_id = login[12]
+                login_LRL = login[4]
+                login_URL = login[5]
+                login_AA = login[6]
+                login_APW = login[7]
+                login_ARP = login[10]
+                login_VA = login[8]
+                login_VPW = login[9]
+                login_VRP = login[11]
+                login_M = login[12]
 
                 loginSuccessful = True
                 window.destroy()
