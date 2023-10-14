@@ -125,6 +125,10 @@ def edit(record_id):
     VRP_edit = Spinbox(editor_frame, from_= 150, to= 500, increment = 10, font=("Arial", 12))
     ARP_edit = Spinbox(editor_frame, from_= 150, to= 500, increment = 10, font=("Arial", 12))
     mode_edit = Entry(editor_frame, font=("Arial", 12))#this can be a drop down menu, if not we can keep it as a text input
+        
+    # clicked = StringVar()
+    # clicked.set("AOO")
+    # mode_edit = OptionMenu(editor_frame, clicked, "AOO", "AAI", "VOO", "VVI")
 
     #input labels
     username_edit_label = Label(editor_frame, text = "Username", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
@@ -201,7 +205,7 @@ def edit(record_id):
         VRP_edit.insert(0,record[10])
         ARP_edit.delete(0,"end")
         ARP_edit.insert(0,record[11])
-        mode_edit.insert(0,record[12])
+        mode_edit.insert(0,record[12]) #the mode selected
 
     editor_frame.pack()
     editor.mainloop()

@@ -26,6 +26,7 @@ def open():
                 loginSuccessful = True
                 window.destroy()
                 open_profile()
+                open()
         if username_entry.get()==admin_username and password_entry.get()==admin_password:
             window.destroy()
             admin_screen()
