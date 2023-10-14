@@ -1,6 +1,8 @@
 from tkinter import *
 import sqlite3
-from edit_data import *
+from tkinter import messagebox
+import tkinter as tk
+import welcome_screen
 
 '''
 root = Tk()
@@ -99,39 +101,67 @@ def update(record_id):
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
-    c.execute("""UPDATE login_info SET
-                username=:username,
-                password=:password,
-                firstName=:firstName,
-                lastName=:lastName,
-                lowerRateLimit=:lowerRateLimit,
-                upperRateLimit=:upperRateLimit,
-                atrialAmplitude=:atrialAmplitude,
-                atrialPulseWidth=:atrialPulseWidth,
-                ventricularAmplitude=:ventricularAmplitude,
-                ventricularPulseWidth=:ventricularPulseWidth,
-                VRP=:VRP,
-                ARP=:ARP,
-                mode=:mode
+    records = query()
+    current_record = None
+    for record in records:
+        if record[13] == record_id:
+            current_record = record
 
-                WHERE oid = :oid""",
+    #print(current_record[4])
+    print(int(lowerRateLimit_edit.get())-int(current_record[4]))
 
-            {   'username':username_edit.get(),
-                'password':password_edit.get(),
-                'firstName':firstName_edit.get(),
-                'lastName':lastName_edit.get(),
-                'lowerRateLimit':lowerRateLimit_edit.get(),
-                'upperRateLimit':upperRateLimit_edit.get(),
-                'atrialAmplitude':atrialAmplitude_edit.get(),
-                'atrialPulseWidth':atrialPulseWidth_edit.get(),
-                'ventricularAmplitude':ventricularAmplitude_edit.get(),
-                'ventricularPulseWidth':ventricularPulseWidth_edit.get(),
-                'VRP':VRP_edit.get(),
-                'ARP':ARP_edit.get(),
-                'mode':mode_edit.get(),
-                'oid': record_id
+    if not(username_edit.get()):
+        messagebox.showinfo(title="Invalid Username",message="Enter a valid username.")
+    elif not(password_edit.get()):
+        messagebox.showinfo(title="Invalid Password",message="Enter a valid password.")
+    elif len(password_edit.get()) < 8:
+        messagebox.showinfo(title="Invalid Password",message="Password must be at least 8 characters.")
+    elif not(firstName_edit.get()):
+        messagebox.showinfo(title="Invalid Name",message="Enter a valid first name.")
+    elif not(lastName_edit.get()):
+        messagebox.showinfo(title="Invalid Name",message="Enter a valid last name.")
+    elif (int(lowerRateLimit_edit.get()) < 30) or (int(lowerRateLimit_edit.get()) > 175):
+        messagebox.showinfo(title="Invalid Lower Rate Limit",message="Lower rate limit must be between 30-175ppm.")
+    elif 30 < int(lowerRateLimit_edit.get()) <= 50:
+        if ((lowerRateLimit_edit.get() - current_record[4]) % 5) != 0:
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
+    elif 90 < int(lowerRateLimit_edit.get()) <= 175:
+        if ((lowerRateLimit_edit.get() - current_record[4]) % 5) != 0:
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
+    else:
+        c.execute("""UPDATE login_info SET
+                    username=:username,
+                    password=:password,
+                    firstName=:firstName,
+                    lastName=:lastName,
+                    lowerRateLimit=:lowerRateLimit,
+                    upperRateLimit=:upperRateLimit,
+                    atrialAmplitude=:atrialAmplitude,
+                    atrialPulseWidth=:atrialPulseWidth,
+                    ventricularAmplitude=:ventricularAmplitude,
+                    ventricularPulseWidth=:ventricularPulseWidth,
+                    VRP=:VRP,
+                    ARP=:ARP,
+                    mode=:mode
 
-        })
+                    WHERE oid = :oid""",
+
+                {   'username':username_edit.get(),
+                    'password':password_edit.get(),
+                    'firstName':firstName_edit.get(),
+                    'lastName':lastName_edit.get(),
+                    'lowerRateLimit':lowerRateLimit_edit.get(),
+                    'upperRateLimit':upperRateLimit_edit.get(),
+                    'atrialAmplitude':atrialAmplitude_edit.get(),
+                    'atrialPulseWidth':atrialPulseWidth_edit.get(),
+                    'ventricularAmplitude':ventricularAmplitude_edit.get(),
+                    'ventricularPulseWidth':ventricularPulseWidth_edit.get(),
+                    'VRP':VRP_edit.get(),
+                    'ARP':ARP_edit.get(),
+                    'mode':mode_edit.get(),
+                    'oid': record_id
+
+            })
 
     #close connection
     conn.commit()
