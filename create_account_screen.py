@@ -21,12 +21,17 @@ def create_acct():
             #check usernames
             usernameExists = False
             logins = query()
+            count = 0
             for login in logins:
+                count += 1
                 if (new_username_entry.get() == login[0]):
                     usernameExists = True
                     messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
             if usernameExists:
                 messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
+            elif count > 9:
+                messagebox.showinfo(title="Account Creation Error",message="Too many existing users.")
+            
             else:
                 submit(new_username_entry.get(),new_password_entry.get(),firstname_entry.get(),lastname_entry.get())
                 messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
