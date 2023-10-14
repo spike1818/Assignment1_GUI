@@ -1,6 +1,5 @@
 from tkinter import *
 import sqlite3
-from functools import partial
 from edit_data import *
 
 '''
