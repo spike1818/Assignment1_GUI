@@ -6,8 +6,10 @@ from VOO_screen import open_VOO
 from VVI_screen import open_VVI
 #from change_settings import change_settings
 import welcome_screen
-import database
+from database import *
 from edit_data import edit_data
+
+
 
 def open_profile():
     profile = tk.Tk()
@@ -18,6 +20,14 @@ def open_profile():
     profile_middleframe = tk.Frame(profile, bg='#4863A0')
     profile_bottomframe = tk.Frame(profile, bg='#4863A0')
 
+    
+    def reopen():
+        profile.destroy()
+        edit(str(welcome_screen.login_id))
+        open_profile()
+        
+
+
     message = "Welcome," + " " + welcome_screen.login_name #matches username entered to name stored in database
     LRLmessage = "Lower Rate Limit: " + str(welcome_screen.login_LRL)
     URLmessage = "Upper Rate Limit: " + str(welcome_screen.login_URL)
@@ -25,7 +35,7 @@ def open_profile():
     AAmessage = "Atrial amplitude: " + str(welcome_screen.login_AA)
     ARPmessage = "ARP: " + str(welcome_screen.login_ARP)
     VPWmessage = "Ventricular Pulse Width: " + str(welcome_screen.login_VPW)
-    VAmessage = "Vntricular Anplitude: " + str(welcome_screen.login_VA)
+    VAmessage = "Vntricular Amplitude: " + str(welcome_screen.login_VA)
     VRPmessage = "VRP: " + str(welcome_screen.login_VRP)
     Mmessage = "Pacing Mode: " + str(welcome_screen.login_M)
 
@@ -40,7 +50,7 @@ def open_profile():
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_VVI)
     #Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = edit_data)
 
-    Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = lambda: database.edit(str(welcome_screen.login_id)))
+    Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = reopen)
 
         #pacing modes
     pulseratelow_acc_title = tk.Label(profile_middleframe, text= LRLmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))

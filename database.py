@@ -56,7 +56,6 @@ def changePassword(account_id, newPassword):
             VRP_ = account[10]
             ARP_ = account[11]
             mode = account[12]
-    print(password)
 
     c.execute("""UPDATE login_info SET
                 username=:username,
@@ -101,6 +100,7 @@ def update(record_id):
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
+    flag = True
     records = query()
     current_record = None
     for record in records:
@@ -121,79 +121,99 @@ def update(record_id):
 
     #lower rate limit
     if (int(lowerRateLimit_edit.get()) < 30) or (int(lowerRateLimit_edit.get()) > 175): #check if lower rate limit is within range
+        flag = False
         messagebox.showinfo(title="Invalid Lower Rate Limit",message="Lower rate limit must be between 30-175ppm.")
     if 30 <= int(lowerRateLimit_edit.get()) <= 50: #check if correct incrementation for 30-50ppm
         if ((int(lowerRateLimit_edit.get()) - int(current_record[4])) % 5) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
     if 90 <= int(lowerRateLimit_edit.get()) <= 175: #check if correct incrementation for 90-175ppm
-        print("hi")
         if ((int(lowerRateLimit_edit.get()) - int(current_record[4])) % 5) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
 
     #upper rate limit
     if (int(upperRateLimit_edit.get()) < 50) or (int(upperRateLimit_edit.get()) > 175): #check if upper rate limit is within range
+        flag = False
         messagebox.showinfo(title="Invalid Upper Rate Limit",message="Upper rate limit must be between 50-175ppm.")
     if (50 < int(upperRateLimit_edit.get()) < 175):
         if ((int(upperRateLimit_edit.get()) - int(current_record[5])) % 5) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
 
     #atrial amplitude
     if (float(atrialAmplitude_edit.get()) < 0) or (0 < float(atrialAmplitude_edit.get()) < 0.5) or (3.2 < float(atrialAmplitude_edit.get()) < 3.5) or (float(atrialAmplitude_edit.get()) > 7.0): #check if atrial amplitude is within range
+        flag = False
         messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
     if (0.5 <= float(atrialAmplitude_edit.get()) <= 3.2): #check if correct incrementation for 0.5-3.2V
         if ((float(atrialAmplitude_edit.get()) - float(current_record[6])) % 0.1) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
     if (3.5 <= float(atrialAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
         if ((float(atrialAmplitude_edit.get()) - float(current_record[6])) % 0.5) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
 
     #atrial pulse width 
     if (float(atrialPulseWidth_edit.get()) < 0.05) or ( 0.05 < float(atrialPulseWidth_edit.get()) < 0.1) or (float(atrialPulseWidth_edit.get()) > 1.9): #check if atrial pulse width is within range
+        flag = False
         messagebox.showinfo(title="Invalid Atrial Pulse Width",message="Atrial pulse width must be equal to 0.05ms or between 0.1-1.9ms.")
     if (0.1 <= float(atrialPulseWidth_edit.get()) <= 1.9): #check if correct incrementation for 0.1-1.9ms
         if ((float(atrialPulseWidth_edit.get()) - float(current_record[7])) % 0.1) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1ms.")
     
     #ventricular amplitude
     if (float(ventricularAmplitude_edit.get()) < 0) or (0 < float(ventricularAmplitude_edit.get()) < 0.5) or (3.2 < float(ventricularAmplitude_edit.get()) < 3.5) or (float(ventricularAmplitude_edit.get()) > 7.0): #check if ventricular amplitude is within range
+        flag = False
         messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
     if (0.5 <= float(ventricularAmplitude_edit.get()) <= 3.2): #check if correct incrementation for 0.5-3.2V
         if ((float(ventricularAmplitude_edit.get()) - float(current_record[8])) % 0.1) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
     if (3.5 <= float(ventricularAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
         if ((float(ventricularAmplitude_edit.get()) - float(current_record[8])) % 0.5) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
 
     #ventricular pulse width
     if (float(ventricularPulseWidth_edit.get()) < 0.05) or (0.05 < float(ventricularPulseWidth_edit.get()) < 0.1) or (float(ventricularPulseWidth_edit.get()) > 1.9): #check if atrial pulse width is within range
+        flag = False
         messagebox.showinfo(title="Invalid Ventricular Pulse Width",message="Ventricular pulse width must be equal to 0.05ms or between 0.1-1.9ms.")
     if (0.1 <= float(ventricularPulseWidth_edit.get()) <= 1.9): #check if correct incrementation for 0.1-1.9ms
         if ((float(ventricularPulseWidth_edit.get()) - float(current_record[9])) % 0.1) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1ms.")
 
     #VRP
     if (int(VRP_edit.get()) < 150) or (int(VRP_edit.get()) > 500):
+        flag = False
         messagebox.showinfo(title="Invalid VRP",message="Ventricular refractory period must be between 150-500ms.")
     if (150 < int(VRP_edit.get()) < 500):
         if ((int(VRP_edit.get()) - int(current_record[10])) % 10) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 10ms.")
 
     #ARP
     if (int(ARP_edit.get()) < 150) or (int(ARP_edit.get()) > 500):
+        flag = False
         messagebox.showinfo(title="Invalid ARP",message="Atrial refractory period must be between 150-500ms.")
     if (150 < int(ARP_edit.get()) < 500):
         if ((int(ARP_edit.get()) - int(current_record[11])) % 10) != 0:
+            flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 10ms.")
 
     #mode
     modes = ["AOO", "AAI", "VOO", "VVI"]
-    flag = False
+    flag2 = False
     for mode in modes:
         if mode_edit.get() == mode:
-            flag = True
+            flag2 = True
     
-    if flag == False:
+    if flag2 == False:
+        flag = False
         messagebox.showinfo(title="Invalid Mode",message="Enter one of the following modes: AOO, AAI, VOO, or VVI.")
+   #Enter one of the following modes: AOO, AAI, VOO, or VVI.
 
 
     # if (mode_edit.get() != "AOO") or (mode_edit.get() != "AAI") or (mode_edit.get() != "VOO") or (mode_edit.get() != "VVI"):
@@ -201,7 +221,7 @@ def update(record_id):
     #     print(type(mode_edit.get()))
     #     messagebox.showinfo(title="Invalid Mode",message="Enter one of the following modes: AOO, AAI, VOO, or VVI.")
 
-    else:
+    if flag == True:
         c.execute("""UPDATE login_info SET
                     username=:username,
                     password=:password,
@@ -235,6 +255,17 @@ def update(record_id):
                     'oid': record_id
 
                 })
+
+        welcome_screen.login_LRL = int(lowerRateLimit_edit.get())
+        welcome_screen.login_URL = int(upperRateLimit_edit.get())
+        welcome_screen.login_AA = float(atrialAmplitude_edit.get())
+        welcome_screen.login_APW = float(atrialPulseWidth_edit.get())
+        welcome_screen.login_VA = float(ventricularAmplitude_edit.get())
+        welcome_screen.login_VPW = float(ventricularPulseWidth_edit.get())
+        welcome_screen.login_VRP = int(VRP_edit.get())
+        welcome_screen.login_ARP = int(ARP_edit.get())
+        welcome_screen.login_M = str(mode_edit.get())
+        
 
     #close connection
     conn.commit()
@@ -311,6 +342,7 @@ def edit(record_id):
 
     #save button
     save_btn = Button(editor_frame, text = "Save Changes", command= lambda: update(welcome_screen.login_id))
+    back_btn = Button(editor_frame, text = "Back", command= editor.destroy)
 
     edit_data_label.grid(row=0, column=0, columnspan=2, pady=10)
 
@@ -346,6 +378,8 @@ def edit(record_id):
 
     #place save button
     save_btn.grid(row=14, column = 0, columnspan=2, pady=10)
+    back_btn.grid(row=15, column = 0, columnspan=2, pady=10)
+
 
     #fill boxes with current info
     for record in records:
@@ -400,8 +434,6 @@ def submit(username, password, firstName, lastName,):
     #connect to database and create cursor (you need to do this inside the function as well, idk why)
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
-    print(username)
-    print(password)
 
     lowerRateLimit = 60
     upperRateLimit = 120
@@ -453,7 +485,6 @@ def query():
     #query the database
     c.execute("SELECT *, oid FROM login_info")
     records = c.fetchall() # list of lists for each row
-    print(records)
     '''
     print_records = ''
     for record in records:
