@@ -4,13 +4,13 @@ from functools import partial
 '''
 root = Tk()
 root.geometry("400x400")
-'''
+
 #create database
 conn = sqlite3.connect('login_list.db')
 
 # Create cursor
 c = conn.cursor()
-
+'''
 #create table
 '''
 c.execute("""CREATE TABLE login_info(
@@ -37,17 +37,36 @@ def update(record_id):
     c = conn.cursor()
 
     c.execute("""UPDATE login_info SET
-        username = :user,
-        password = :pword,
-        first_name = :first,
-        last_name = :last
+                username=:username,
+                password=:password,
+                firstName=:firstName,
+                lastName=:lastName,
+                lowerRateLimit=:lowerRateLimit,
+                upperRateLimit=:upperRateLimit,
+                atrialAmplitude=:atrialAmplitude,
+                atrialPulseWidth=:atrialPulseWidth,
+                ventricularAmplitude=:ventricularAmplitude,
+                ventricularPulseWidth=:ventricularPulseWidth,
+                VRP=:VRP,
+                ARP=:ARP,
+                mode=:mode
 
-        WHERE oid = :oid""",
-        {'user': user_edit.get(),
-        'pword': pword_edit.get(),
-        'first': fname_edit.get(),
-        'last': lname_edit.get(),
-        'oid': record_id
+                WHERE oid = :oid""",
+
+            {   'username':username_edit.get(),
+                'password':password_edit.get(),
+                'firstName':firstName_edit.get(),
+                'lastName':lastName_edit.get(),
+                'lowerRateLimit':lowerRateLimit_edit.get(),
+                'upperRateLimit':upperRateLimit_edit.get(),
+                'atrialAmplitude':atrialAmplitude_edit.get(),
+                'atrialPulseWidth':atrialPulseWidth_edit.get(),
+                'ventricularAmplitude':ventricularAmplitude_edit.get(),
+                'ventricularPulseWidth':ventricularPulseWidth_edit.get(),
+                'VRP':VRP_edit.get(),
+                'ARP':ARP_edit.get(),
+                'mode':mode_edit.get(),
+                'oid': record_id
 
         })
 
@@ -69,42 +88,106 @@ def edit(record_id):
     c.execute("SELECT * FROM login_info WHERE oid = " + record_id)
     records = c.fetchall() # list of lists for each row
 
-    #global variables for text box names
-    global user_edit
-    global pword_edit
-    global fname_edit
-    global lname_edit
+    #global variables for text box names (this is needed to pass the contents of the box to the update function)
+    global username_edit
+    global password_edit
+    global firstName_edit
+    global lastName_edit
+    global lowerRateLimit_edit
+    global upperRateLimit_edit
+    global atrialAmplitude_edit
+    global atrialPulseWidth_edit
+    global ventricularAmplitude_edit
+    global ventricularPulseWidth_edit
+    global VRP_edit
+    global ARP_edit
+    global mode_edit
 
     #text boxes for test input
-    user_edit = Entry(editor, width = 30)
-    user_edit.grid(row=0, column = 1, padx=20)
-    pword_edit = Entry(editor, width = 30)
-    pword_edit.grid(row=1, column = 1)
-    fname_edit = Entry(editor, width = 30)
-    fname_edit.grid(row=2, column = 1)
-    lname_edit = Entry(editor, width = 30)
-    lname_edit.grid(row=3, column = 1)
+    username_edit = Entry(editor, width = 30)
+    username_edit.grid(row=0, column = 1, padx=20)
+    password_edit = Entry(editor, width = 30)
+    password_edit.grid(row=1, column = 1)
+    firstName_edit = Entry(editor, width = 30)
+    firstName_edit.grid(row=2, column = 1)
+    lastName_edit = Entry(editor, width = 30)
+    lastName_edit.grid(row=3, column = 1)
+    lowerRateLimit_edit = Spinbox(editor, from_= 30, to= 175, increment = 5)#needs to be increment 1 for 50-90
+    lowerRateLimit_edit.grid(row=4, column = 1)
+    upperRateLimit_edit = Spinbox(editor, from_= 50, to= 175, increment = 5)
+    upperRateLimit_edit.grid(row=5, column = 1)
+    atrialAmplitude_edit = Spinbox(editor, from_= 0.5, to= 7.0, increment = 0.1)#needs to be increment 0.5 for 3.5-7
+    atrialAmplitude_edit.grid(row=6, column = 1)
+    atrialPulseWidth_edit = Spinbox(editor, from_= 0.1, to= 1.9, increment = 0.1)#single step from 0.1 - 0.05
+    atrialPulseWidth_edit.grid(row=7, column = 1)
+    ventricularAmplitude_edit = Spinbox(editor, from_= 0.5, to= 7.0, increment = 0.1)#same as atrialAmplidtude
+    ventricularAmplitude_edit.grid(row=8, column = 1)
+    ventricularPulseWidth_edit = Spinbox(editor, from_= 0.1, to= 1.9, increment = 0.1)#same as atrial
+    ventricularPulseWidth_edit.grid(row=9, column = 1)
+    VRP_edit = Spinbox(editor, from_= 150, to= 500, increment = 10)
+    VRP_edit.grid(row=10, column = 1)
+    ARP_edit = Spinbox(editor, from_= 150, to= 500, increment = 10)
+    ARP_edit.grid(row=11, column = 1)
+    mode_edit = Entry(editor, width = 30)#this can be a drop down menu, if not we can keep it as a text input
+    mode_edit.grid(row=12, column = 1)
+    
 
     #labels
-    user_edit_label = Label(editor, text = "Username")
-    user_edit_label.grid(row=0,column = 0)
-    pword_edit_label = Label(editor, text = "Password")
-    pword_edit_label.grid(row=1,column = 0)
-    fname_edit_label = Label(editor, text = "First Name")
-    fname_edit_label.grid(row=2,column = 0)
-    lname_edit_label = Label(editor, text = "Last Name")
-    lname_edit_label.grid(row=3,column = 0)
+    username_edit_label = Label(editor, text = "Username")
+    username_edit_label.grid(row=0,column = 0)
+    password_edit_label = Label(editor, text = "Password")
+    password_edit_label.grid(row=1,column = 0)
+    firstName_edit_label = Label(editor, text = "First Name")
+    firstName_edit_label.grid(row=2,column = 0)
+    lastName_edit_label = Label(editor, text = "Last Name")
+    lastName_edit_label.grid(row=3,column = 0)
+    lowerRateLimit_edit_label = Label(editor, text = "Lower Rate Limit")
+    lowerRateLimit_edit_label.grid(row=4,column = 0)
+    upperRateLimit_edit_label = Label(editor, text = "Upper Rate Limit")
+    upperRateLimit_edit_label.grid(row=5,column = 0)
+    atrialAmplitude_edit_label = Label(editor, text = "Atrial Amplitude")
+    atrialAmplitude_edit_label.grid(row=6,column = 0)
+    atrialPulseWidth_edit_label = Label(editor, text = "Atrial Pulse Width")
+    atrialPulseWidth_edit_label.grid(row=7,column = 0)
+    ventricularAmplitude_edit_label = Label(editor, text = "Vetricular Amplitude")
+    ventricularAmplitude_edit_label.grid(row=8,column = 0)
+    ventricularPulseWidth_edit_label = Label(editor, text = "Ventricular Pulse Width")
+    ventricularPulseWidth_edit_label.grid(row=9,column = 0)
+    VRP_edit_label = Label(editor, text = "VRP")
+    VRP_edit_label.grid(row=10,column = 0)
+    ARP_edit_label = Label(editor, text = "ARP")
+    ARP_edit_label.grid(row=11,column = 0)
+    mode_edit_label = Label(editor, text = "Mode")
+    mode_edit_label.grid(row=12,column = 0)
 
     #fill boxes with current info
     for record in records:
-        user_edit.insert(0,record[0])
-        pword_edit.insert(0,record[1])
-        fname_edit.insert(0,record[2])
-        lname_edit.insert(0,record[3])
+        username_edit.insert(0,record[0])
+        password_edit.insert(0,record[1])
+        firstName_edit.insert(0,record[2])
+        lastName_edit.insert(0,record[3])
+        lowerRateLimit_edit.delete(0,"end")#spinboxes will automatically fill with lowest value, this is needed to clear them before putting the acutal value in there
+        lowerRateLimit_edit.insert(0,record[4])
+        upperRateLimit_edit.delete(0,"end")
+        upperRateLimit_edit.insert(0,record[5])
+        atrialAmplitude_edit.delete(0,"end")
+        atrialAmplitude_edit.insert(0,record[6])
+        atrialPulseWidth_edit.delete(0,"end")
+        atrialPulseWidth_edit.insert(0,record[7])
+        ventricularAmplitude_edit.delete(0,"end")
+        ventricularAmplitude_edit.insert(0,record[8])
+        ventricularPulseWidth_edit.delete(0,"end")
+        ventricularPulseWidth_edit.insert(0,record[9])
+        VRP_edit.delete(0,"end")
+        VRP_edit.insert(0,record[10])
+        ARP_edit.delete(0,"end")
+        ARP_edit.insert(0,record[11])
+        mode_edit.insert(0,record[12])
+
 
     #save button
     save_btn = Button(editor, text = "Save Changes", command= lambda: update(record_id))
-    save_btn.grid(row=4, column = 0)
+    save_btn.grid(row=13, column = 0)
 
     #close connection
     conn.commit()
@@ -202,7 +285,6 @@ def query():
     conn.close()
 
     return records
-
 
 
 '''

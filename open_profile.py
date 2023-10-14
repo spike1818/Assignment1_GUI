@@ -6,6 +6,7 @@ from VOO_screen import open_VOO
 from VVI_screen import open_VVI
 from change_settings import change_settings
 import welcome_screen
+import database
 
 def open_profile():
     profile = tk.Tk()
@@ -27,7 +28,7 @@ def open_profile():
     voo = tk.Button(profile_middleframe, text = "VOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VOO)
     aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AAI)
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VVI)
-    Profile_edit = tk.Button(profile_bottomframe, text = "Profile Edit", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = change_settings)
+    Profile_edit = tk.Button(profile_bottomframe, text = "Profile Edit", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = lambda: database.edit(str(welcome_screen.login_id)))
 
         #pacing modes
     pulserate_acc_title = tk.Label(profile_middleframe, text="Pulse Rate: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))

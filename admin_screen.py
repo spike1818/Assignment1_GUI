@@ -14,7 +14,7 @@ def admin_screen():
         print_records = ''
         records = query()
         for record in records:
-            print_records+= str(record[0])+", "+str(record[4])+"\n"
+            print_records+= str(record[0])+", "+str(record[13])+"\n"
 
         query_label = Label(admin_frame, text = print_records, bg='#4863A0', fg='#FFFFFF')
         query_label.grid(row=4, column=0, columnspan = 2)
