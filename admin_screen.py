@@ -9,7 +9,13 @@ def admin_screen():
     admin_window.title("Admin Settings")
     admin_window.geometry('500x400')
     admin_window.configure(bg='#4863A0')
-            
+    
+    #get admin id number
+    records = query()
+    for record in records:
+        if(record[0] == "admin"):
+            admin_id = record[13]
+    
     #print records
     def show_users():
         print_records = ''
@@ -31,7 +37,7 @@ def admin_screen():
     show_users_button = tk.Button(admin_frame, text="Show Usernames/IDs", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=show_users)
     password_entry = tk.Entry(admin_frame, font=("Arial",12))
     password_label = tk.Label(admin_frame, text="Admin Password", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    change_password_button = tk.Button(admin_frame, text="Change Password", bg='#FFFFFF', fg='#000000', font=("Arial", 10))
+    change_password_button = tk.Button(admin_frame, text="Change Password", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command= lambda: changePassword(admin_id,password_entry.get()))
     signout_button = tk.Button(admin_frame, text="Sign Out", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=admin_window.destroy)
 
     #place widgets

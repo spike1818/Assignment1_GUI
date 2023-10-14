@@ -29,7 +29,15 @@ def open():
         global login_M
   
         for login in logins:
-            if username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
+            if username_entry.get()==login[0] and password_entry.get()==login[1] and username_entry.get() == "admin":
+
+                admin_screen()
+                loginSuccessful = True
+                window.destroy()
+                open_profile()
+                open()
+
+            elif username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
                 login_name = login_name = login[2] + " " + login[3]
                 login_id = login[13]
                 login_LRL = login[4]
@@ -46,11 +54,7 @@ def open():
                 window.destroy()
                 open_profile()
                 open()
-        if username_entry.get()==admin_username and password_entry.get()==admin_password:
-            window.destroy()
-            admin_screen()
-            open()
-        elif (not loginSuccessful):
+        if (not loginSuccessful):
             messagebox.showinfo(title="Invalid Login",message="Your login credentials are invalid.") #**need a way to link this to create account
 
     #make the window

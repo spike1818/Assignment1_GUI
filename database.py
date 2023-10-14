@@ -39,20 +39,6 @@ def changePassword(account_id, newPassword):
 
     accounts = query()
 
-    username
-    password
-    firstName
-    lastName
-    lowerRateLimit
-    upperRateLimit
-    atrialAmplitude
-    atrialPulseWidth
-    ventricularAmplitude
-    ventricularPulseWidth
-    VRP
-    ARP
-    mode
-
     for account in accounts:
         if (account[13] == account_id):
             username = account[0]
@@ -65,9 +51,10 @@ def changePassword(account_id, newPassword):
             atrialPulseWidth = account[7]
             ventricularAmplitude = account[8]
             ventricularPulseWidth = account[9]
-            VRP = account[10]
-            ARP = account[11]
+            VRP_ = account[10]
+            ARP_ = account[11]
             mode = account[12]
+    print(password)
 
     c.execute("""UPDATE login_info SET
                 username=:username,
@@ -87,7 +74,7 @@ def changePassword(account_id, newPassword):
                 WHERE oid = :oid""",
 
             {   'username':username,
-                'password':password,
+                'password':newPassword,
                 'firstName':firstName,
                 'lastName':lastName,
                 'lowerRateLimit':lowerRateLimit,
@@ -96,12 +83,15 @@ def changePassword(account_id, newPassword):
                 'atrialPulseWidth':atrialPulseWidth,
                 'ventricularAmplitude':ventricularAmplitude,
                 'ventricularPulseWidth':ventricularPulseWidth,
-                'VRP':VRP,
-                'ARP':ARP,
+                'VRP':VRP_,
+                'ARP':ARP_,
                 'mode':mode,
                 'oid': account_id
 
         })
+    #close connection
+    conn.commit()
+    conn.close()
 
 def update(record_id):
 
