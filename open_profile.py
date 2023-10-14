@@ -11,7 +11,7 @@ from edit_data import edit_data
 
 def open_profile():
     profile = tk.Tk()
-    profile.geometry("500x500")
+    profile.geometry("600x650")
     profile.configure(bg='#4863A0')
     profile.title("Profile Page")
     profile_topframe = tk.Frame(profile, bg='#4863A0')
@@ -19,35 +19,45 @@ def open_profile():
     profile_bottomframe = tk.Frame(profile, bg='#4863A0')
 
     message = "Welcome," + " " + welcome_screen.login_name #matches username entered to name stored in database
+    #LRLmessage = "Lower Rate Limit: " + welcome_screen.LRL
+
 
     #create info for corner of screen
     connection_message = tk.Label(profile, text="Connection Status: Pacemaker not connected\nPacemaker version: 1\nDate of implant: 01/01/2023", bg='#4863A0', fg='#FFFFFF', font=("Arial",8))
-    welcome_message = tk.Label(profile_topframe, text = message, bg='#4863A0', fg='#FFFFFF', font=("Georgia", 16))
-    tracing_message = tk.Label(profile_middleframe, text = "Tracing Methods", bg='#4863A0', fg='#FFFFFF', font=("Georgia", 16))
+    welcome_message = tk.Label(profile_topframe, text = message, bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
+    tracing_message = tk.Label(profile_middleframe, text = "Tracing Methods", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     sign_out = tk.Button(profile_bottomframe, text = "Sign Out", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = profile.destroy)
-    aoo = tk.Button(profile_middleframe, text = "AOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AOO)
-    voo = tk.Button(profile_middleframe, text = "VOO", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VOO)
-    aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_AAI)
-    vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = open_VVI)
+    aoo = tk.Button(profile_middleframe, text = "AOO", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_AOO)
+    voo = tk.Button(profile_middleframe, text = "VOO", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_VOO)
+    aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_AAI)
+    vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_VVI)
     #Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = edit_data)
 
     Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = lambda: database.edit(str(welcome_screen.login_id)))
 
         #pacing modes
-    pulserate_acc_title = tk.Label(profile_middleframe, text="Pulse Rate: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulsewidth_acc_title = tk.Label(profile_middleframe, text="Pulse Width: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    pulseamp_acc_title = tk.Label(profile_middleframe, text="Pulse Amplitude: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    sensingsense_acc_title = tk.Label(profile_middleframe, text="Sensing Sensitivity: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseratelow_acc_title = tk.Label(profile_middleframe, text="Lower Rate Limit: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseratehigh_acc_title = tk.Label(profile_middleframe, text="Upper Rate Limit: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulsewidth_arial_title = tk.Label(profile_middleframe, text="Arial Pulse Width: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseamp_arial_title = tk.Label(profile_middleframe, text="Arial Amplitude: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulsewidth_ventr_title = tk.Label(profile_middleframe, text="Ventricular Pulse Width: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    pulseamp_ventr_title = tk.Label(profile_middleframe, text="Ventricular Amplitude: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    VRP_acc_title = tk.Label(profile_middleframe, text="VRP: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     pacingmode_acc_title = tk.Label(profile_middleframe, text="Pacing Mode: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    refracper_acc_title = tk.Label(profile_middleframe, text="Refractory Period: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    ARP_acc_title = tk.Label(profile_middleframe, text="ARP: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    hysterisis_title = tk.Label(profile_middleframe, text="Hysterisis: ", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
 
         #acc title alignment
-    pulserate_acc_title.grid(row=1,column=0)
-    pulsewidth_acc_title.grid(row=2,column=0)
-    pulseamp_acc_title.grid(row=3,column=0)
-    sensingsense_acc_title.grid(row=4,column=0)
-    pacingmode_acc_title.grid(row=5,column=0)
-    refracper_acc_title.grid(row=6,column=0)
+    pulseratelow_acc_title.grid(row=2,column=0)
+    pulseratehigh_acc_title.grid(row=3,column=0)
+    pulsewidth_arial_title.grid(row=4,column=0)
+    pulseamp_arial_title.grid(row=5,column=0)
+    pulsewidth_ventr_title.grid(row=6,column=0)
+    pulseamp_ventr_title.grid(row=7,column=0)
+    VRP_acc_title.grid(row=8,column=0)
+    pacingmode_acc_title.grid(row=11,column=0)
+    ARP_acc_title.grid(row=9,column=0)
+    hysterisis_title.grid(row = 10, column = 0)
     
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
@@ -58,7 +68,15 @@ def open_profile():
     voo.grid(row=3, column=2, pady=10)
     aai.grid(row=4, column=2)
     vvi.grid(row=5, column=2, pady=10)
-    profile_middleframe.grid_rowconfigure(10, minsize=50)
+
+    #fixing row spacing
+    profile_middleframe.grid_rowconfigure(6, minsize=35)
+    profile_middleframe.grid_rowconfigure(7, minsize=35)
+    profile_middleframe.grid_rowconfigure(8, minsize=35)
+    profile_middleframe.grid_rowconfigure(9, minsize=35)
+    profile_middleframe.grid_rowconfigure(10, minsize=35)
+    profile_middleframe.grid_rowconfigure(11, minsize=35) 
+    profile_middleframe.grid_rowconfigure(12, minsize=50)
     profile_middleframe.grid_columnconfigure(1, min = 150)
     profile_topframe.pack()
     profile_middleframe.pack()

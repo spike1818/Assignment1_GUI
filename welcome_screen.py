@@ -17,12 +17,18 @@ def open():
         logins = query()
         loginSuccessful = False
         global login_name
-        global login_id
+        global login_id #, LRL_id, URL_id, AA_id, APW_id, VA_id, VPW_id, VRP_id, ARP_id, M_id
+  
         for login in logins:
             print(login) #do we need this?
             if username_entry.get()==login[0] and password_entry.get()==login[1]: #need to pull from database
                 login_name = login_name = login[2] + " " + login[3]
                 login_id = login[13]
+                #LRL_id = login[4], URL_id = login[5]
+                #AA_id = login[6], APW_id = login[7], ARP_id = login[10]
+                #VA_id = login[8], VPW_id = login[9], VRP_id = login[11]
+                #M_id = login[12]
+
                 loginSuccessful = True
                 window.destroy()
                 open_profile()
@@ -44,7 +50,7 @@ def open():
     frame = tk.Frame(bg='#4863A0')
 
     #make widgets
-    login_label = tk.Label(frame, text="Login", bg='#4863A0', fg='#FFFFFF', font=("Georgia", 30))
+    login_label = tk.Label(frame, text="Login", bg='#4863A0', fg='#FFFFFF', font=("Arial", 30))
     username_label = tk.Label(frame, text="Username", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     password_label = tk.Label(frame, text="Password", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     username_entry = tk.Entry(frame, font=("Arial", 12))

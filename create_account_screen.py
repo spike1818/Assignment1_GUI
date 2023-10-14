@@ -51,7 +51,7 @@ def create_acct():
     create_frame = tk.Frame(create_window, bg='#4863A0')
 
     #create widgets
-    create_acct_label = tk.Label(create_frame, text="Create Account", bg='#4863A0', fg='#FFFFFF', font=("Georgia", 30))
+    create_acct_label = tk.Label(create_frame, text="Create Account", bg='#4863A0', fg='#FFFFFF', font=("Arial", 30))
     firstname_label = tk.Label(create_frame, text="First Name", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     lastname_label = tk.Label(create_frame, text="Last Name", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
     new_username_label = tk.Label(create_frame, text="Username", bg='#4863A0', fg='#FFFFFF', font=("Arial", 16))
