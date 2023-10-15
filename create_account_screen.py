@@ -33,7 +33,7 @@ def create_acct():
                     messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
             if usernameExists:
                 messagebox.showinfo(title="Username Creation Error",message="Username already exists.")
-            elif count > 9:
+            elif count > 10:
                 messagebox.showinfo(title="Account Creation Error",message="Too many existing users.")
             
             else:
