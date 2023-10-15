@@ -92,4 +92,8 @@ def open_profile():
     #later will check whether pacemaker is connected before displaying error message
     messagebox.showinfo(title="Connection Error",message="Pacemaker is not connected.")
 
+    #check if new pacemaker is different than previous pacemaker
+    # if pacemaker != current_pacemaker:
+    #     messagebox.showinfo(title="New Pacemaker",message="New pacemaker device has been approached.")
+
     profile.mainloop()

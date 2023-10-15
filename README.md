@@ -1,7 +1,3 @@
 # Assignment1_GUI
 
-hello it's alex
-
-Sam is here as well
-
-Alastair is me three
+SWRENG/MECHTRON 3K04 Assignment 1

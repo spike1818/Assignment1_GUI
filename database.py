@@ -76,6 +76,8 @@ def update(record_id):
     #name info
     if not(username_edit.get()):
         messagebox.showinfo(title="Invalid Username",message="Enter a valid username.")
+    if len(username_edit.get()) < 4:
+        messagebox.showinfo(title="Invalid Username",message="Username must be at least 4 characters.")
     if not(password_edit.get()):
         messagebox.showinfo(title="Invalid Password",message="Enter a valid password.")
     if len(password_edit.get()) < 8:
@@ -393,13 +395,11 @@ def edit(record_id):
 #delete function
 def delete(idNum):
 
-    #connect to database and create cursor (you need to do this inside the function as well, idk why)
+    #connect to database and create cursor
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
     c.execute("DELETE from login_info WHERE oid =" + idNum)#use oid instead of username or password because there may be multiples
-
-    #delete_box.delete(0,END)
 
     conn.commit()
     conn.close()
@@ -407,7 +407,7 @@ def delete(idNum):
 #submit function
 def submit(username, password, firstName, lastName,):
 
-    #connect to database and create cursor (you need to do this inside the function as well, idk why)
+    #connect to database and create cursor
     conn = sqlite3.connect('login_list.db')
     c = conn.cursor()
 
@@ -441,12 +441,6 @@ def submit(username, password, firstName, lastName,):
 
     conn.commit()
     conn.close()
-
-    #clear text boxes
-    #user.delete(0, END)
-    #pword.delete(0, END)
-    #fname.delete(0, END)
-    #lname.delete(0, END)
 
 def query():
 
