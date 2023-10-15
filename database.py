@@ -120,24 +120,29 @@ def update(record_id):
         messagebox.showinfo(title="Invalid Name",message="Enter a valid last name.")
 
     #lower rate limit
-    if (int(lowerRateLimit_edit.get()) < 30) or (int(lowerRateLimit_edit.get()) > 175): #check if lower rate limit is within range
+    if not(lowerRateLimit_edit.get().isdigit()): #make sure input is whole and non-negative
+        flag = False
+        messagebox.showinfo(title="Invalid Lower Rate Limit",message="Lower rate limit must be a non-negative whole number.")
+    if (int(lowerRateLimit_edit.get()) < 30) or int(float(lowerRateLimit_edit.get())) > 175: #check if lower rate limit is within range
         flag = False
         messagebox.showinfo(title="Invalid Lower Rate Limit",message="Lower rate limit must be between 30-175ppm.")
     if 30 <= int(lowerRateLimit_edit.get()) <= 50: #check if correct incrementation for 30-50ppm
-        if ((int(lowerRateLimit_edit.get()) - int(current_record[4])) % 5) != 0:
+        if (int(lowerRateLimit_edit.get()) % 5) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
     if 90 <= int(lowerRateLimit_edit.get()) <= 175: #check if correct incrementation for 90-175ppm
-        if ((int(lowerRateLimit_edit.get()) - int(current_record[4])) % 5) != 0:
+        if (int(lowerRateLimit_edit.get()) % 5) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
 
     #upper rate limit
+    if not(upperRateLimit_edit.get().isdigit()):
+        messagebox.showinfo(title="Invalid Upper Rate Limit",message="Upper rate limit must be a non-negative whole number.")
     if (int(upperRateLimit_edit.get()) < 50) or (int(upperRateLimit_edit.get()) > 175): #check if upper rate limit is within range
         flag = False
         messagebox.showinfo(title="Invalid Upper Rate Limit",message="Upper rate limit must be between 50-175ppm.")
     if (50 < int(upperRateLimit_edit.get()) < 175):
-        if ((int(upperRateLimit_edit.get()) - int(current_record[5])) % 5) != 0:
+        if (int(upperRateLimit_edit.get()) % 5) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
 
@@ -146,11 +151,11 @@ def update(record_id):
         flag = False
         messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
     if (0.5 <= float(atrialAmplitude_edit.get()) <= 3.2): #check if correct incrementation for 0.5-3.2V
-        if ((float(atrialAmplitude_edit.get()) - float(current_record[6])) % 0.1) != 0:
+        if (int(100*float(atrialAmplitude_edit.get())) % 10) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
     if (3.5 <= float(atrialAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
-        if ((float(atrialAmplitude_edit.get()) - float(current_record[6])) % 0.5) != 0:
+        if (int(100*float(atrialAmplitude_edit.get())) % 5) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
 
@@ -159,7 +164,7 @@ def update(record_id):
         flag = False
         messagebox.showinfo(title="Invalid Atrial Pulse Width",message="Atrial pulse width must be equal to 0.05ms or between 0.1-1.9ms.")
     if (0.1 <= float(atrialPulseWidth_edit.get()) <= 1.9): #check if correct incrementation for 0.1-1.9ms
-        if ((float(atrialPulseWidth_edit.get()) - float(current_record[7])) % 0.1) != 0:
+        if (int(100*float(atrialPulseWidth_edit.get())) % 10) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1ms.")
     
@@ -168,11 +173,11 @@ def update(record_id):
         flag = False
         messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
     if (0.5 <= float(ventricularAmplitude_edit.get()) <= 3.2): #check if correct incrementation for 0.5-3.2V
-        if ((float(ventricularAmplitude_edit.get()) - float(current_record[8])) % 0.1) != 0:
+        if (int(100*float(ventricularAmplitude_edit.get())) % 10) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
     if (3.5 <= float(ventricularAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
-        if ((float(ventricularAmplitude_edit.get()) - float(current_record[8])) % 0.5) != 0:
+        if (int(100*float(ventricularAmplitude_edit.get())) % 5) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
 
@@ -181,7 +186,7 @@ def update(record_id):
         flag = False
         messagebox.showinfo(title="Invalid Ventricular Pulse Width",message="Ventricular pulse width must be equal to 0.05ms or between 0.1-1.9ms.")
     if (0.1 <= float(ventricularPulseWidth_edit.get()) <= 1.9): #check if correct incrementation for 0.1-1.9ms
-        if ((float(ventricularPulseWidth_edit.get()) - float(current_record[9])) % 0.1) != 0:
+        if (int(100*float(ventricularPulseWidth_edit.get())) % 10) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1ms.")
 
@@ -256,6 +261,7 @@ def update(record_id):
 
                 })
 
+        welcome_screen.login_name = str(firstName_edit.get() + " " + lastName_edit.get())
         welcome_screen.login_LRL = int(lowerRateLimit_edit.get())
         welcome_screen.login_URL = int(upperRateLimit_edit.get())
         welcome_screen.login_AA = float(atrialAmplitude_edit.get())
@@ -334,7 +340,7 @@ def edit(record_id):
     upperRateLimit_edit_label = Label(editor_frame, text = "Upper Rate Limit", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     atrialAmplitude_edit_label = Label(editor_frame, text = "Atrial Amplitude", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     atrialPulseWidth_edit_label = Label(editor_frame, text = "Atrial Pulse Width", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    ventricularAmplitude_edit_label = Label(editor_frame, text = "Vetricular Amplitude", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
+    ventricularAmplitude_edit_label = Label(editor_frame, text = "Ventricular Amplitude", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     ventricularPulseWidth_edit_label = Label(editor_frame, text = "Ventricular Pulse Width", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     VRP_edit_label = Label(editor_frame, text = "VRP", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     ARP_edit_label = Label(editor_frame, text = "ARP", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
