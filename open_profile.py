@@ -4,12 +4,8 @@ from AAI_screen import open_AAI
 from AOO_screen import open_AOO
 from VOO_screen import open_VOO
 from VVI_screen import open_VVI
-#from change_settings import change_settings
 import welcome_screen
 from database import *
-from edit_data import edit_data
-
-
 
 def open_profile():
     profile = tk.Tk()
@@ -20,14 +16,11 @@ def open_profile():
     profile_middleframe = tk.Frame(profile, bg='#4863A0')
     profile_bottomframe = tk.Frame(profile, bg='#4863A0')
 
-    
     def reopen():
         profile.destroy()
         edit(str(welcome_screen.login_id))
         open_profile()
         
-
-
     message = "Welcome," + " " + welcome_screen.login_name #matches username entered to name stored in database
     LRLmessage = "Lower Rate Limit: " + str(welcome_screen.login_LRL)
     URLmessage = "Upper Rate Limit: " + str(welcome_screen.login_URL)
@@ -48,11 +41,10 @@ def open_profile():
     voo = tk.Button(profile_middleframe, text = "VOO", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_VOO)
     aai = tk.Button(profile_middleframe, text = "AAI", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_AAI)
     vvi = tk.Button(profile_middleframe, text = "VVI", bg='#FFFFFF', fg='#000000', font=("Arial", 12), command = open_VVI)
-    #Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = edit_data)
+   
+    profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = reopen)
 
-    Profile_edit = tk.Button(profile_bottomframe, text = "Edit Profile", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command = reopen)
-
-        #pacing modes
+    #pacing modes
     pulseratelow_acc_title = tk.Label(profile_middleframe, text= LRLmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     pulseratehigh_acc_title = tk.Label(profile_middleframe, text= URLmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
     pulsewidth_arial_title = tk.Label(profile_middleframe, text= APWmessage, bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
@@ -77,7 +69,7 @@ def open_profile():
     connection_message.place(rely=1.0, relx=1.0, x=0, y=0, anchor=tk.SE)
     welcome_message.grid(row=0, column=0, columnspan=6, sticky="news", pady = 20)
     tracing_message.grid(row=1, column=2, pady=10)
-    Profile_edit.grid(row=0, column = 0)
+    profile_edit.grid(row=0, column = 0)
     sign_out.grid(row=1, column=0, pady=10)
     aoo.grid(row=2, column=2)
     voo.grid(row=3, column=2, pady=10)

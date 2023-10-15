@@ -101,11 +101,6 @@ def update(record_id):
     c = conn.cursor()
 
     flag = True
-    # records = query()
-    # current_record = None
-    # for record in records:
-    #     if record[13] == record_id:
-    #         current_record = record
 
     #name info
     if not(username_edit.get()):
@@ -283,8 +278,7 @@ def update(record_id):
         welcome_screen.login_VRP = int(VRP_edit.get())
         welcome_screen.login_ARP = int(ARP_edit.get())
         welcome_screen.login_M = str(mode_edit.get())
-        
-
+    
     #close connection
     conn.commit()
     conn.close()
@@ -322,7 +316,7 @@ def edit(record_id):
 
     editor_frame = tk.Frame(editor, bg='#4863A0')
 
-    edit_data_label = Label(editor_frame, text="Edit Settings",bg='#4863A0', fg='#FFFFFF', font=("Arial", 24))
+    edit_data_label = Label(editor_frame, text="Edit Profile",bg='#4863A0', fg='#FFFFFF', font=("Arial", 24))
 
     #input field
     username_edit = Entry(editor_frame, font=("Arial",12))
