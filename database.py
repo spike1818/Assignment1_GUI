@@ -147,6 +147,8 @@ def update(record_id):
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
 
     #atrial amplitude
+    if not((atrialAmplitude_edit.get())[0].isdigit()):
+        messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be a non-negative decimal number.")
     if (float(atrialAmplitude_edit.get()) < 0) or (0 < float(atrialAmplitude_edit.get()) < 0.5) or (3.2 < float(atrialAmplitude_edit.get()) < 3.5) or (float(atrialAmplitude_edit.get()) > 7.0): #check if atrial amplitude is within range
         flag = False
         messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
@@ -160,6 +162,8 @@ def update(record_id):
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
 
     #atrial pulse width 
+    if not(atrialPulseWidth_edit.get()[0].isdigit()):
+        messagebox.showinfo(title="Invalid Atrial Pulse Width",message="Atrial pulse width must be a non-negative decimal number.")
     if (float(atrialPulseWidth_edit.get()) < 0.05) or ( 0.05 < float(atrialPulseWidth_edit.get()) < 0.1) or (float(atrialPulseWidth_edit.get()) > 1.9): #check if atrial pulse width is within range
         flag = False
         messagebox.showinfo(title="Invalid Atrial Pulse Width",message="Atrial pulse width must be equal to 0.05ms or between 0.1-1.9ms.")
@@ -169,6 +173,8 @@ def update(record_id):
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1ms.")
     
     #ventricular amplitude
+    if not(ventricularAmplitude_edit.get()[0].isdigit()):
+        messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be a non-negative decimal number.")
     if (float(ventricularAmplitude_edit.get()) < 0) or (0 < float(ventricularAmplitude_edit.get()) < 0.5) or (3.2 < float(ventricularAmplitude_edit.get()) < 3.5) or (float(ventricularAmplitude_edit.get()) > 7.0): #check if ventricular amplitude is within range
         flag = False
         messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
@@ -177,11 +183,13 @@ def update(record_id):
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
     if (3.5 <= float(ventricularAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
-        if (int(100*float(ventricularAmplitude_edit.get())) % 5) != 0:
+        if (int(100*float(ventricularAmplitude_edit.get())) % 50) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
 
-    #ventricular pulse width
+    # #ventricular pulse width
+    if not(ventricularPulseWidth_edit.get()[0].isdigit()):
+        messagebox.showinfo(title="Invalid Ventricular Pulse Width",message="Ventricular pulse width must be a non-negative decimal number.")
     if (float(ventricularPulseWidth_edit.get()) < 0.05) or (0.05 < float(ventricularPulseWidth_edit.get()) < 0.1) or (float(ventricularPulseWidth_edit.get()) > 1.9): #check if atrial pulse width is within range
         flag = False
         messagebox.showinfo(title="Invalid Ventricular Pulse Width",message="Ventricular pulse width must be equal to 0.05ms or between 0.1-1.9ms.")
@@ -191,20 +199,26 @@ def update(record_id):
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1ms.")
 
     #VRP
+    if not(VRP_edit.get().isdigit()): #make sure input is whole and non-negative
+        flag = False
+        messagebox.showinfo(title="Invalid VRP",message="Ventricular refractory period must be a non-negative whole number.")
     if (int(VRP_edit.get()) < 150) or (int(VRP_edit.get()) > 500):
         flag = False
         messagebox.showinfo(title="Invalid VRP",message="Ventricular refractory period must be between 150-500ms.")
     if (150 < int(VRP_edit.get()) < 500):
-        if ((int(VRP_edit.get()) - int(current_record[10])) % 10) != 0:
+        if (int(VRP_edit.get()) % 10) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 10ms.")
 
     #ARP
+    if not(ARP_edit.get().isdigit()): #make sure input is whole and non-negative
+        flag = False
+        messagebox.showinfo(title="Invalid ARP",message="Atrial refractory period must be a non-negative whole number.")
     if (int(ARP_edit.get()) < 150) or (int(ARP_edit.get()) > 500):
         flag = False
         messagebox.showinfo(title="Invalid ARP",message="Atrial refractory period must be between 150-500ms.")
     if (150 < int(ARP_edit.get()) < 500):
-        if ((int(ARP_edit.get()) - int(current_record[11])) % 10) != 0:
+        if (int(ARP_edit.get()) % 10) != 0:
             flag = False
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 10ms.")
 
@@ -218,13 +232,6 @@ def update(record_id):
     if flag2 == False:
         flag = False
         messagebox.showinfo(title="Invalid Mode",message="Enter one of the following modes: AOO, AAI, VOO, or VVI.")
-   #Enter one of the following modes: AOO, AAI, VOO, or VVI.
-
-
-    # if (mode_edit.get() != "AOO") or (mode_edit.get() != "AAI") or (mode_edit.get() != "VOO") or (mode_edit.get() != "VVI"):
-    #     print(mode_edit.get())
-    #     print(type(mode_edit.get()))
-    #     messagebox.showinfo(title="Invalid Mode",message="Enter one of the following modes: AOO, AAI, VOO, or VVI.")
 
     if flag == True:
         c.execute("""UPDATE login_info SET
