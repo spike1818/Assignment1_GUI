@@ -196,7 +196,7 @@ def update(record_id):
             messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 10ms.")
 
     #mode
-    modes = ["AOO", "AAI", "VOO", "VVI"]
+    modes = ["AOO", "AAI", "VOO", "VVI", "OFF"]
     flag2 = False
     for mode in modes:
         if mode_edit.get() == mode:
@@ -204,7 +204,7 @@ def update(record_id):
     
     if flag2 == False:
         flag = False
-        messagebox.showinfo(title="Invalid Mode",message="Enter one of the following modes: AOO, AAI, VOO, or VVI.")
+        messagebox.showinfo(title="Invalid Mode",message="Enter one of the following modes: AOO, AAI, VOO, VVI, or OFF.")
 
     if flag == True:
         c.execute("""UPDATE login_info SET
@@ -419,7 +419,7 @@ def submit(username, password, firstName, lastName,):
     ventricularPulseWidth = 0.4
     VRP = 320
     ARP = 250
-    mode = "off"
+    mode = "OFF"
 
     #insert into table
     c.execute("INSERT INTO login_info VALUES(:username,:password,:firstName,:lastName,:lowerRateLimit,:upperRateLimit,:atrialAmplitude,:atrialPulseWidth,:ventricularAmplitude,:ventricularPulseWidth,:VRP,:ARP,:mode)",
