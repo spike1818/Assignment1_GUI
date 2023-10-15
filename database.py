@@ -4,35 +4,6 @@ from tkinter import messagebox
 import tkinter as tk
 import welcome_screen
 
-'''
-root = Tk()
-root.geometry("400x400")
-
-#create database
-conn = sqlite3.connect('login_list.db')
-
-# Create cursor
-c = conn.cursor()
-'''
-#create table
-'''
-c.execute("""CREATE TABLE login_info(
-            username text, 
-            password text, 
-            firstName text, 
-            lastName text, 
-            lowerRateLimit integer,
-            upperRateLimit integer,
-            atrialAmplitude real,
-            atrialPulseWidth real,
-            ventricularAmplitude real,
-            ventricularPulseWidth real,
-            VRP integer,
-            ARP integer,
-            Mode text
-          )""")
-'''
-
 def changePassword(account_id, newPassword):
 
     #open connection
@@ -310,7 +281,7 @@ def edit(record_id):
     global mode_edit
 
     editor = Tk()
-    editor.title('Edit Data')
+    editor.title("Edit Profile")
     editor.geometry("500x600")
     editor.configure(bg='#4863A0')
 
@@ -332,10 +303,6 @@ def edit(record_id):
     VRP_edit = Spinbox(editor_frame, from_= 150, to= 500, increment = 10, font=("Arial", 12))
     ARP_edit = Spinbox(editor_frame, from_= 150, to= 500, increment = 10, font=("Arial", 12))
     mode_edit = Entry(editor_frame, font=("Arial", 12))#this can be a drop down menu, if not we can keep it as a text input
-        
-    # clicked = StringVar()
-    # clicked.set("AOO")
-    # mode_edit = OptionMenu(editor_frame, clicked, "AOO", "AAI", "VOO", "VVI")
 
     #input labels
     username_edit_label = Label(editor_frame, text = "Username", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
@@ -356,7 +323,7 @@ def edit(record_id):
     save_btn = Button(editor_frame, text = "Save Changes", command= lambda: update(welcome_screen.login_id))
     back_btn = Button(editor_frame, text = "Back", command= editor.destroy)
 
-    edit_data_label.grid(row=0, column=0, columnspan=2, pady=10)
+    edit_data_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=10)
 
     #place input boxes
     username_edit.grid(row=1, column = 1, padx=20, pady=10)
@@ -390,7 +357,7 @@ def edit(record_id):
 
     #place save button
     save_btn.grid(row=14, column = 0, columnspan=2, pady=10)
-    back_btn.grid(row=15, column = 0, columnspan=2, pady=10)
+    back_btn.grid(row=15, column = 0, columnspan=2)
 
 
     #fill boxes with current info
@@ -421,8 +388,7 @@ def edit(record_id):
     editor.mainloop()
     #close connection
     conn.commit()
-    conn.close()
-    
+    conn.close() 
 
 #delete function
 def delete(idNum):
@@ -437,8 +403,6 @@ def delete(idNum):
 
     conn.commit()
     conn.close()
-
-
 
 #submit function
 def submit(username, password, firstName, lastName,):
@@ -475,8 +439,6 @@ def submit(username, password, firstName, lastName,):
                 'mode':mode
             })
 
-
-
     conn.commit()
     conn.close()
 
@@ -485,8 +447,6 @@ def submit(username, password, firstName, lastName,):
     #pword.delete(0, END)
     #fname.delete(0, END)
     #lname.delete(0, END)
-
-
 
 def query():
 
@@ -497,77 +457,8 @@ def query():
     #query the database
     c.execute("SELECT *, oid FROM login_info")
     records = c.fetchall() # list of lists for each row
-    '''
-    print_records = ''
-    for record in records:
-         print_records += str(record[0]) + " " + str(record[1]) + " " + str(record[2])+  " " + str(record[3]) + " " + str(record[4]) + "\n"
-    
-    query_label = Label(root, text = print_records)
-    query_label.grid(row = 10, column = 0, columnspan = 2)
-    '''
 
     conn.commit()
     conn.close()
 
     return records
-
-
-'''
-#text boxes for test input
-user = Entry(root, width = 30)
-user.grid(row=0, column = 1, padx=20)
-
-pword = Entry(root, width = 30)
-pword.grid(row=1, column = 1)
-
-fname = Entry(root, width = 30)
-fname.grid(row=2, column = 1)
-
-lname = Entry(root, width = 30)
-lname.grid(row=3, column = 1)
-
-delete_box = Entry(root, width = 30)
-delete_box.grid(row=7, column = 1)
-
-#labels
-user_label = Label(root, text = "Username")
-user_label.grid(row=0,column = 0)
-
-pword_label = Label(root, text = "Password")
-pword_label.grid(row=1,column = 0)
-
-fname_label = Label(root, text = "First Name")
-fname_label.grid(row=2,column = 0)
-
-lname_label = Label(root, text = "Last Name")
-lname_label.grid(row=3,column = 0)
-
-delete_label = Label(root, text = "Select ID")
-delete_label.grid(row=7,column=0)
-
-#submit button
-submit_btn = Button(root, text="add login to database", command=lambda: submit(user.get(),pword.get(),fname.get(),lname.get()))
-submit_btn.grid(row=5,column=0,columnspan=2,pady=10, padx=10)
-
-#query button
-query_btn = Button(root, text="Show Records", command=query)
-query_btn.grid(row=6,column=0,columnspan=2,pady=10, padx=10)
-
-
-#select button
-delete_btn = Button(root, text="Delete Record", command=delete)
-delete_btn.grid(row=8,column=0,columnspan=2,pady=10, padx=10)
-
-#edit button
-edit_btn = Button(root, text="Edit Record", command=lambda: edit(delete_box.get()))
-edit_btn.grid(row=9,column=0,columnspan=2,pady=10, padx=10)
-
-#commit changes
-conn.commit()
-
-
-#close connection
-conn.close()
-
-root.mainloop()
-'''

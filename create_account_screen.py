@@ -44,7 +44,7 @@ def create_acct():
     #window
     create_window = tk.Tk()
     create_window.title("Create Account")
-    create_window.geometry('600x400')
+    create_window.geometry('600x450')
     create_window.configure(bg='#4863A0')
 
     #frame to hold the widgets
@@ -63,6 +63,7 @@ def create_acct():
     new_password_entry = tk.Entry(create_frame, show="*", font=("Arial", 12))
     confirm_password_entry = tk.Entry(create_frame, show="*", font=("Arial", 12))
     create_acct_button = tk.Button(create_frame, text="Create Account", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=new_user)
+    back_button = tk.Button(create_frame, text="Back", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=create_window.destroy)
 
     #place widgets
     create_acct_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=30)
@@ -77,6 +78,7 @@ def create_acct():
     new_password_entry.grid(row=4, column=1, pady=10) 
     confirm_password_entry.grid(row=5, column=1, pady=10, padx=5)
     create_acct_button.grid(row=6, column=0, columnspan=2, pady=10)
+    back_button.grid(row=7,column=0, columnspan=2)
 
     create_frame.pack() #pack is responsive by default
 

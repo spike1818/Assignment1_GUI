@@ -11,8 +11,12 @@ admin_username = "admin"
 admin_password = "password"
 
 def open():
-    #global login_id
-    # #checks against database for user credentials
+
+    def reopen():
+        window.destroy()
+        create_acct()
+        open()
+
     def login():
         logins = query()
         loginSuccessful = False
@@ -73,7 +77,7 @@ def open():
     username_entry = tk.Entry(frame, font=("Arial", 12))
     password_entry = tk.Entry(frame, show="*", font=("Arial", 12))
     login_button = tk.Button(frame, text="Login", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=login)
-    new_acct_button = tk.Button(frame, text="Create New Account", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=create_acct)
+    new_acct_button = tk.Button(frame, text="Create New Account", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=reopen)
 
     #place widgets
     login_label.grid(row=0, column=0, columnspan=2, sticky="news", pady=40)
