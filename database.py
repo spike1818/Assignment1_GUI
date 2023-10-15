@@ -101,11 +101,11 @@ def update(record_id):
     c = conn.cursor()
 
     flag = True
-    records = query()
-    current_record = None
-    for record in records:
-        if record[13] == record_id:
-            current_record = record
+    # records = query()
+    # current_record = None
+    # for record in records:
+    #     if record[13] == record_id:
+    #         current_record = record
 
     #name info
     if not(username_edit.get()):
@@ -119,6 +119,11 @@ def update(record_id):
     if not(lastName_edit.get()):
         messagebox.showinfo(title="Invalid Name",message="Enter a valid last name.")
 
+
+    if int(upperRateLimit_edit.get()) < int(lowerRateLimit_edit.get()):
+        flag = False
+        messagebox.showinfo(title="Rate Limit Error",message="Upper rate limit cannot be less than lower rate limit.")
+
     #lower rate limit
     if not(lowerRateLimit_edit.get().isdigit()): #make sure input is whole and non-negative
         flag = False
@@ -129,11 +134,11 @@ def update(record_id):
     if 30 <= int(lowerRateLimit_edit.get()) <= 50: #check if correct incrementation for 30-50ppm
         if (int(lowerRateLimit_edit.get()) % 5) != 0:
             flag = False
-            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm between 30-50ppm.")
     if 90 <= int(lowerRateLimit_edit.get()) <= 175: #check if correct incrementation for 90-175ppm
         if (int(lowerRateLimit_edit.get()) % 5) != 0:
             flag = False
-            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm.")
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 5ppm between 90-175ppm.")
 
     #upper rate limit
     if not(upperRateLimit_edit.get().isdigit()):
@@ -151,15 +156,15 @@ def update(record_id):
         messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be a non-negative decimal number.")
     if (float(atrialAmplitude_edit.get()) < 0) or (0 < float(atrialAmplitude_edit.get()) < 0.5) or (3.2 < float(atrialAmplitude_edit.get()) < 3.5) or (float(atrialAmplitude_edit.get()) > 7.0): #check if atrial amplitude is within range
         flag = False
-        messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
+        messagebox.showinfo(title="Invalid Atrial Amplitude",message="Atrial amplitude must be 0 or between 0.5-3.2V or 3.5-7.0V.")
     if (0.5 <= float(atrialAmplitude_edit.get()) <= 3.2): #check if correct incrementation for 0.5-3.2V
         if (int(100*float(atrialAmplitude_edit.get())) % 10) != 0:
             flag = False
-            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V between 0.5-3.2V.")
     if (3.5 <= float(atrialAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
         if (int(100*float(atrialAmplitude_edit.get())) % 5) != 0:
             flag = False
-            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V between 3.5-7.0V.")
 
     #atrial pulse width 
     if not(atrialPulseWidth_edit.get()[0].isdigit()):
@@ -177,15 +182,15 @@ def update(record_id):
         messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be a non-negative decimal number.")
     if (float(ventricularAmplitude_edit.get()) < 0) or (0 < float(ventricularAmplitude_edit.get()) < 0.5) or (3.2 < float(ventricularAmplitude_edit.get()) < 3.5) or (float(ventricularAmplitude_edit.get()) > 7.0): #check if ventricular amplitude is within range
         flag = False
-        messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be off or between 0.5-3.2V or 3.5-7.0V.")
+        messagebox.showinfo(title="Invalid Ventricular Amplitude",message="Ventricular amplitude must be 0 or between 0.5-3.2V or 3.5-7.0V.")
     if (0.5 <= float(ventricularAmplitude_edit.get()) <= 3.2): #check if correct incrementation for 0.5-3.2V
         if (int(100*float(ventricularAmplitude_edit.get())) % 10) != 0:
             flag = False
-            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V.")
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.1V between 0.5-3.2V.")
     if (3.5 <= float(ventricularAmplitude_edit.get()) <= 7.0): #check if correct incrementation for 3.5-7.0V
         if (int(100*float(ventricularAmplitude_edit.get())) % 50) != 0:
             flag = False
-            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V.")
+            messagebox.showinfo(title="Incrementation Error",message="Starting value must be incremented by 0.5V between 3.5-7.0V.")
 
     # #ventricular pulse width
     if not(ventricularPulseWidth_edit.get()[0].isdigit()):
