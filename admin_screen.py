@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from database import *
 
+db = database()
 
 def admin_screen():
     admin_window = tk.Tk()
@@ -11,7 +12,7 @@ def admin_screen():
     admin_window.configure(bg='#4863A0')
     
     #get admin id number
-    records = query()
+    records = db.query()
     for record in records:
         if(record[0] == "admin"):
             admin_id = record[13]
@@ -19,7 +20,7 @@ def admin_screen():
     #print records
     def show_users():
         print_records = ''
-        records = query()
+        records = db.query()
         for record in records:
             if record[0] == "admin":
                 pass
@@ -35,12 +36,12 @@ def admin_screen():
     #make widgets
     delete_user_entry = tk.Entry(admin_frame, font=("Arial", 12))
     delete_user_label = tk.Label(admin_frame, text="Enter ID", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    delete_user_button = tk.Button(admin_frame, text="Delete User", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=lambda: delete(delete_user_entry.get()))
+    delete_user_button = tk.Button(admin_frame, text="Delete User", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=lambda: db.delete(delete_user_entry.get()))
     admin_label = tk.Label(admin_frame, text="Admin Settings", bg='#4863A0', fg='#FFFFFF', font=("Arial", 30))
     show_users_button = tk.Button(admin_frame, text="Show Usernames/IDs", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=show_users)
     password_entry = tk.Entry(admin_frame, font=("Arial",12))
     password_label = tk.Label(admin_frame, text="Admin Password", bg='#4863A0', fg='#FFFFFF', font=("Arial", 12))
-    change_password_button = tk.Button(admin_frame, text="Change Password", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command= lambda: changePassword(admin_id,password_entry.get()))
+    change_password_button = tk.Button(admin_frame, text="Change Password", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command= lambda: db.changePassword(admin_id,password_entry.get()))
     signout_button = tk.Button(admin_frame, text="Sign Out", bg='#FFFFFF', fg='#000000', font=("Arial", 10), command=admin_window.destroy)
 
     #place widgets
@@ -54,7 +55,7 @@ def admin_screen():
     change_password_button.grid(row=8, column=0, columnspan=2, pady=10)
     signout_button.grid(row=9, column=0, columnspan=2)
 
-    records = query()
+    records = db.query()
     for record in records:
         if record[0] == "admin":
             current_password = record[1]
