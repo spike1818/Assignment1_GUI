@@ -13,7 +13,7 @@ def create_acct():
             messagebox.showinfo(title="Account Creation Error",message="Enter a valid last name.")
         elif not(new_username_entry.get()):
             messagebox.showinfo(title="Account Creation Error",message="Enter a valid username.")
-        elif new_username_entry.get() < 4:
+        elif len(new_username_entry.get()) < 4:
              messagebox.showinfo(title="Account Creation Error",message="Username must be at least 4 characters.")
         elif not(new_password_entry.get()):
             messagebox.showinfo(title="Password Creation Error",message="Enter a valid password.")
