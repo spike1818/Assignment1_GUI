@@ -2,6 +2,7 @@ import tkinter as tk
 from welcome_screen import *
 from tkinter import messagebox
 from database import *
+db = database()
 
  #creates a new user and adds their information to database
 def create_acct():
@@ -24,7 +25,7 @@ def create_acct():
         else:
             #check usernames
             usernameExists = False
-            logins = query()
+            logins = db.query()
             count = 0
             for login in logins:
                 count += 1
@@ -37,7 +38,7 @@ def create_acct():
                 messagebox.showinfo(title="Account Creation Error",message="Too many existing users.")
             
             else:
-                submit(new_username_entry.get(),new_password_entry.get(),firstname_entry.get(),lastname_entry.get())
+                db.submit(new_username_entry.get(),new_password_entry.get(),firstname_entry.get(),lastname_entry.get())
                 messagebox.showinfo(title="Account Creation Success",message="Account creation successful.")
                 create_window.destroy()
         

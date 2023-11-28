@@ -9,6 +9,7 @@ from create_account_screen import *
 #simple example for demonstrative purposes
 admin_username = "admin"
 admin_password = "password"
+db = database()
 
 def open():
 
@@ -18,7 +19,7 @@ def open():
         open()
 
     def login():
-        logins = query()
+        logins = db.query()
         loginSuccessful = False
         global login_name
         global login_id
